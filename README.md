@@ -9,12 +9,12 @@ Currently, Dawkside functions smoothly in conjunction with Reaper. Ableton Live 
 - Each page allows you to add any plugin parameter onto 32 sliders or knobs.
 - You can add 32 buttons on each page. These buttons can control plugin settings, send notes or MIDI messages, use sysex, OSC, and predefined mouse movements.
 - Ssupports motorized controllers and adjusts to changes.
-- Even non-motorized controllers can now use a pickup or direct mode, even if your controller doesn't support it naturally.
+- Non-motorized controllers can now use a pickup or direct mode, even if the controller doesn't support it naturally.
 - It replicates the accessible version of Push's 64 scaled pads mode in Live, including its scales and a simple drum rack.
 - It also supports musical keyboards, letting you create transposition zones, keyboard splits, chord modes, etc.
 - Keyboard transposition and zones automatically adapts to the track's name. For example, violin 1 can be transposed in a way and saved. It'll transpose automatically the next time that track's name is encountered, for a particular plugin.
 - All these features are accessible through simple questionnaires answered with numbers.
-- Customizing an entire controller takes only a few minutes. The functionalities are shared among active DAWs (Digital Audio Workstations). For instance, the undo button is in the same place in Reaper and Live.
+- Customizing an entire controller takes only a few minutes. The functionalities are shared among active DAWs. For instance, the undo button is in the same place in Reaper and Live.
 - You can modify all configurations using unencrypted JSON files (for advanced users).
 - Each button can contain sequences of actions. For instance, you can configure a button to move the mouse pointer to a specific area and produce a sound or send a MIDI note.
 - Fixed, momentary, and latch modes are available for each button. Pressed and released states can be configured independantly.

@@ -10,7 +10,7 @@ class Live:
 	""" Control Live calls. """
 	
 	def __init__(self,main):
-		self.name = "Live"
+		self.name = "AbletonLive"
 		self.short_name = 'live'
 		self.developer = ["Ableton"]
 		self.switch_on = True
