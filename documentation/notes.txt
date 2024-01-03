@@ -1,0 +1,19 @@
+Ideas:
+- Offer a dashboard for all active daws.
+- Create a chord play mode for keys and pads.
+
+Bugs:
+	- Pickup mode not working well if a parameter appears twice in the grid.
+
+To do:
+	- Adapt all selected controllers.
+	- Adjust 400-407 to 430-437 accordingly when using play m odes.
+	- Add all light feedback for buttons. (midi note, mouse event, etc..)
+	- Add direct page selection.
+	- Add pedal actions.
+	- Add rotary sensitivity to encoders.
+	- Convert modwheel to parameter adjustment, when needed.
+	- Single fader action for X-Touch one.
+
+Later:
+	- Various screen implementations.
