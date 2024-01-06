@@ -58,7 +58,7 @@ def matrix_in(self,*args,**kwargs):
 			else:
 				matrix['refer'].update({refer_id:[pos]})
 	
-	if action == 'full':
+	if action == 'full' and self.getting_in:
 
 		for key,value in self.getting_in.items():
 			if key in matrix['commands']:
@@ -78,7 +78,7 @@ def matrix_in(self,*args,**kwargs):
 
 		self.refer_colors.update({args[0]:args[1]})
 
-		if id in matrix['refer']:
+		if self.getting_in and id in matrix['refer']:
 			for refers in matrix['refer'][id]:
 				if refers in self.getting_in:
 					trig(args[1],self.getting_in[refers])

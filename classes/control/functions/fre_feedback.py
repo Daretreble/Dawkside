@@ -21,7 +21,7 @@ def fre_feedback(self,*args):
 					print(pos)
 					fstmp[0] = False
 	
-		if pos+200 in self.getting_in:
+		if self.getting_in and pos+200 in self.getting_in:
 			getting_in = self.getting_in[pos+200]
 			model = getting_in[0]['model']
 			

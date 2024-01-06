@@ -38,7 +38,9 @@ def control_init(self):
 			},
 		},
 		2:{
-			'common':{},
+			102:{
+				80:[94.{}],
+			},
 		},
 		3:{
 			'common':{},

@@ -26,6 +26,7 @@ Currently, Dawkside functions smoothly in conjunction with Reaper. Ableton Live 
 - AKAI Midi Mix
 - Arturia Keylab Mk2
 - Icon Platform X+
+- mWave Chocolate foot switch
 - Korg D1
 
 # Dawkside Setup Guide

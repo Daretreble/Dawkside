@@ -1,5 +1,6 @@
 import psutil
 import time
+from threading import Thread
 from functions.speak import speak
 
 def daw_loader(main):
@@ -7,29 +8,37 @@ def daw_loader(main):
 
 	daws_order = ['reaper','live']
 	
-	if len(main.daws) == 0:
-
-		print('Scanning for daws.')
-	
-		for p in psutil.process_iter():
-				
-			# Load Reaper
-			if 'reaper' not in main.daws and p.name() == 'reaper.exe':
-				from daw.reaper.reaper import Reaper
-				Reaper = Reaper(main)
-				main.daws['reaper'] = Reaper
-				time.sleep(5)
-				Reaper.startup()
-				speak("Reaper is running.",printout=True)
+	def waiting_loop():
+		while True:
 			
-			# Load Ableton Live
-			if 'live' not in main.daws and "Ableton Live" in p.name():
-				from daw.live.live import Live
-				Live = Live(main)
-				main.daws['live'] = Live
-				Live.startup()
+			time.sleep(3)
 
+			for p in psutil.process_iter():
 
-		for _ in daws_order:
-			if _ in main.daws:
-				main.daws_index.append(_)
+				# Detects Reaper
+				if 'reaper' not in main.daws and p.name() == 'reaper.exe':
+					reaper_launch()
+
+				# Detects Live
+				if 'live' not in main.daws and p.name() == 'Ableton Live 12 Beta.exe':
+					live_launch()
+
+			time.sleep(3)
+
+	Thread(target=waiting_loop).start()
+	
+	def reaper_launch():
+		from daw.reaper.reaper import Reaper
+		Reaper = Reaper(main)
+		main.daws['reaper'] = Reaper
+		main.daws_index.append('reaper')
+		Reaper.startup()
+		speak(Reaper.name+" is active.",printout=True)
+
+	def live_launch():
+		from daw.live.live import Live
+		Live = Live(main)
+		main.daws['live'] = Live
+		main.daws_index.append('live')
+		Live.startup()
+		speak(Live.name+" is active.",printout=True)

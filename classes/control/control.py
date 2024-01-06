@@ -22,6 +22,8 @@ class Control:
 		# defaults
 		self.routing_destination = False
 		self.fre_count = 8
+		self.getting_in = False
+		self.colors = False,
 		self.pre_midi = False
 		self.post_midi = False
 		self.row_def = ['Faders','A','B','C']

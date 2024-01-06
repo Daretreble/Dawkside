@@ -3,6 +3,8 @@ import time
 def get_data(self):
 	""" Sets Live's data. """
 
+	#self.client.send_message('/live/api/reload',())
+
 	tracks = self.tracks
 	scenes = self.scenes
 	

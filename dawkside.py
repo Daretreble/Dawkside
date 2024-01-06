@@ -14,7 +14,6 @@ import psutil
 import sys
 import os
 import time
-from threading import Thread
 from classes.main import Main
 from functions.speak import speak
 from functions.daw_loader import daw_loader
@@ -42,12 +41,8 @@ if __name__ == "__main__":
 	main.play_sound('intro')
 
 	# Load DAWs
-	def waiting_for_daws():
-		daw_loader(main)
-		time.sleep(3)
-		waiting_for_daws()
-	Thread(target=waiting_for_daws).start()
-	
+	daw_loader(main)
+		
 	# Load devices
 	device_loader(main)
 

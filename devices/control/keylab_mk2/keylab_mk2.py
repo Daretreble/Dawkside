@@ -27,13 +27,14 @@ def control_init(self):
 				72:[70,{}],
 				73:[105,{}],
 				74:[106,{}],
-				75:[1100,{}],
+				75:[1199,{}],
 				76:[80,{}],
 				77:[81,{}],
 				78:[104,{}],
 				79:[98,{}],
 				93:[93,{}],
 				94:[94,{}],
+				95:[1100,{}],
 			},
 			100:{},
 			101:{},
@@ -51,7 +52,12 @@ def control_init(self):
 			},
 		},
 		2:{
-			'common':{},
+			'common':{
+				80:[376,{}],
+				81:[377,{}],
+				82:[378,{}],
+				83:[379,{}],
+			},
 		},
 		3:{
 			'common':{},
@@ -64,8 +70,6 @@ def control_init(self):
 
 	# Add menus to layouts
 	for _ in range(400,408):
-		self.default_layout['all'][1]['common'].update({_-320:[_,{}]})
-	for _ in range(410,410+len(self.main.outmodes)):
 		self.default_layout['all'][1]['common'].update({_-320:[_,{}]})
 	
 	# Add fader buttons
