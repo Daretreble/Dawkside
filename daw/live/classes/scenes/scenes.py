@@ -6,8 +6,7 @@ class Scenes:
 	def __init__(self,daw):
 	
 		self.daw = daw
-		self.num = 0
-		self.selected  = 0
+		self.index = [0,0]
 		
 	def trig(self,*args,**kwargs):
 	

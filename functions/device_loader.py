@@ -2,6 +2,7 @@ import os
 import importlib
 import mido
 import mido.backends.rtmidi
+import pprint
 
 from classes.control.control import Control
 from classes.keys.keys import Keys
@@ -21,9 +22,14 @@ def device_loader(main):
 			data = device_module.data
 			data.update({'short_name': d})
 			port = data['ports'][0]
-			stripped_elements = [item for item in inports if item.startswith(port)]
+			linked_ports = []
+			for _ in inports:
+				if _.startswith(port):
+					inports.remove(_)
+					linked_ports.append(_)
+			#linked_ports = [item for item in inports if item.startswith(port)]
 			
-			if len(stripped_elements) > 0:
+			if len(linked_ports) > 0:
 				if data['type'] == 'control':
 					main.devices[cat][d] = Control(main, data)
 				elif data['type'] == 'keys':

@@ -95,7 +95,7 @@ going_out = {
 data = {
 	'type':'control',
 	'name' : "mWave Chocolate",
-	'ports':['USB-Midi 0',False],
+	'ports':['USB-Midi',False],
 	'going_out':going_out,
 	'control_init':[control_init]
 }

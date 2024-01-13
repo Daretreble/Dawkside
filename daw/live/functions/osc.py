@@ -15,7 +15,6 @@ def osc(self,*args):
 		self.transport.osc_manage(args[0],args[1])
 	
 	if args[0] == '/live/startup':
-		self.datatmp[2] = True
 		self.get_data()
 	
 	if args[0].startswith('/live/track/get/') and 'devices' not in args[0]:
@@ -38,6 +37,14 @@ def osc(self,*args):
 		self.switchtime = time.time()
 		self.datatmp['track_change'] = True
 
+	if args[0] == '/live/view/get/selected_scene':
+		self.scenes.index[0] = args[1]
+		self.client.send_message('/live/clip_slot/get/has_clip',(self.track.index[0],self.scenes.index[0]))
+		speak(self.scenes.index[0])
+	
+	if args[0] == '/live/clip_slot/get/has_clip' and args[3] and args[1] == self.track.index[0] and args[2] == self.scenes.index[0]:
+		main.play_sound('high')
+	
 	if args[0] == '/live/song/get/num_tracks':
 		tracks.num = args[1]
 		
@@ -124,6 +131,8 @@ def osc(self,*args):
 	
 	if args[0] == '/live/view/get/selected_scene':
 		scenes.selected = args[1]
+		time.sleep(0.5)
+		self.speak(scenes.selected)
 		
 	if args[0] == '/live/device/get/parameter/value':
 		speak(round(args[4],3))

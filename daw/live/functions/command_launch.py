@@ -34,6 +34,7 @@ def command_launch(self,control,id,info,options):
 		control.matrix_in(id,c,action='unit')
 
 	## Reloads Ableton OSC
-		if state and id == 1199:
-			self.client.send_message('/live/api/reload',())
-			speak("Ableton OSC API is reloading.")
+	if state and id == 1199:
+		speak("Ableton OSC API is reloading.")
+		self.get_data()
+		#self.client.send_message('/live/api/reload',())
