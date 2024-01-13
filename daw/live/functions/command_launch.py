@@ -24,10 +24,16 @@ def command_launch(self,control,id,info,options):
 	if state and id == 81:
 		self.client.send_message('/live/song/redo',())
 
-	if state and id == 104:
-		self.client.send_message('/live/song/tap_tempo',())
+	## Tap tempo
+	if id == 104:
+		if state:
+			c = 'tr_play_on'
+			self.client.send_message('/live/song/tap_tempo',())
+		else:
+			c = 'tr_play_off'
+		control.matrix_in(id,c,action='unit')
 
 	## Reloads Ableton OSC
 		if state and id == 1199:
-		self.client.send_message('/live/api/reload',())
-		speak("Ableton OSC API is reloading.")
+			self.client.send_message('/live/api/reload',())
+			speak("Ableton OSC API is reloading.")
