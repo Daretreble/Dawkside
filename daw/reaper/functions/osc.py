@@ -67,7 +67,7 @@ def osc(self,*args):
 		
 	## Plugins osc
 	
-	# Get parameters's  values
+	# Get parameter  valuees
 	if args[0].startswith('/fxparam'):
 		zones = args[0].split('/')
 		

@@ -12,12 +12,16 @@ class Keys:
 		self.control_assoc = False
 		self.routing_destination = False
 		self.velo_curve = False
+		self.keys_init = False
+		self.pre_midi = False
 		self.__dict__.update(data)
 		if 'control_assoc' in data['settings'] and data['settings']['control_assoc'] in main.devices['control']:
 			self.control_assoc = main.devices['control'][data['settings']['control_assoc']]
 		self.port = MidiSurfaces(self.ports,self.main				)
 		if self.port.inport:
 			Thread(target=self.midi_loop).start()
+			if self.keys_init:
+				self.keys_init[0](self)
 			self.act = True
 		self.notes_on = []
 		self.zones_config = [

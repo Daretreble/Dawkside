@@ -165,6 +165,13 @@ def model_convert(model,value,last_value):
 	else:
 		return False
 
+def find_position(number):
+    
+	bank = number // 8
+	position = number % 8
+
+	return [position, bank]
+
 def bank_position(range,bank,num):
 
 	start = range[0]

@@ -209,7 +209,6 @@ for _ in range(200,208):
 	going_out['cc'].update({(_-129,0):[_,{'model':'r1'}]})
 
 data = {
-	'type':'control',
 	'name' : "Ableton Push 1",
 	'ports':['MIDIIN2 (Ableton Push)','MIDIOUT2 (Ableton Push)'],
 	'touch_tolerance':20,

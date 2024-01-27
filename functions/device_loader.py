@@ -30,7 +30,7 @@ def device_loader(main):
 			#linked_ports = [item for item in inports if item.startswith(port)]
 			
 			if len(linked_ports) > 0:
-				if data['type'] == 'control':
+				if cat == 'control':
 					main.devices[cat][d] = Control(main, data)
-				elif data['type'] == 'keys':
+				elif cat == 'keys':
 					main.devices[cat][d] = Keys(main,data)

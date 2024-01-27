@@ -58,7 +58,8 @@ def manage(self):
 								'valstr':value_string,
 							})
 						
-							daw.fre['plugins']['ids'][paramtmp['prm']] = [_]					
+						daw.fre['plugins']['ids'][paramtmp['prm']] = [_]					
+													
 			
 			## USER
 			if plugins.page_type == 0:

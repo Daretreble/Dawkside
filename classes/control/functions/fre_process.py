@@ -104,8 +104,9 @@ def fre_process(self,info):
 					m.fre_feedback(11,pos,new_value)
 		
 		if sn == 'live':
-			for m in daw.online['control']:
-				m.fre_feedback(self.daw_vars['outmode'],pos,new_value)
+			pass
+			"""for m in daw.online['control']:
+				m.fre_feedback(self.daw_vars['outmode'],pos,new_value)"""
 		
 		if new_value:
 			fre_tmp['pitch'][0] = new_value

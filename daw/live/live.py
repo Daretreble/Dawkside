@@ -1,3 +1,4 @@
+import time
 from .classes import *
 from classes.track.track import Track
 from classes.tracks.tracks import Tracks
@@ -42,9 +43,9 @@ class Live:
 		self.main = main
 		self.plugins = Plugins(self)
 		self.scenes = Scenes(self)
+		self.clips = Clips(self)
 		self.session = Session(self)
 		self.transport= Transport(self)
-		self.scenes = Scenes(self)
 		self.online = {'control':[],'keys':[]}
 		self.modes = {
 			100:{'name':'Dashboard','desc':"Live's Dashboard mode encompasses all the tools necessary for software navigation, accessing various functions, and configuring settings."},
@@ -55,7 +56,13 @@ class Live:
 		self.datatmp = {
 			'first_load':True,
 			'first_pass_startup':True,
-			'track_change':True,
+			'osc_tracking':{
+				'track_change':[True,time.time()],
+				'page_change':[False,time.time()],
+			},
+			'listens':{
+				'parameters':[],
+			},
 		}
 		self.song_listeners = {
 			'tempo':[False],

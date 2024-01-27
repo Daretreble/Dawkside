@@ -10,7 +10,18 @@ class Clips:
 		self.daw = daw
 		self.selected  = False
 		
-	def trig(self,*args,**kwargs):
+	def delete(self,*args):
+		""" Deletes selected clip """
+
+		self.daw.client.send_message('/live/clip_slot/delete_clip',(args[0],args[1]))
+
+	def trig(self,*args):
+		""" Deletes selected clip """
+
+		self.daw.client.send_message('/live/clip_slot/delete_clip',(args[0],args[1]))
+	
+	def pad_trig(self,*args,**kwargs):
+		""" Triggers defined clip """
 
 		action = kwargs['action']
 		daw = self.daw

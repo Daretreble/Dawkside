@@ -101,7 +101,6 @@ for _ in range(300,308):
 	getting_in.update({_:[{'model':'nt'},_-300]})
 
 data = {
-	'type':'control',
 	'name' : "Icon Platform X+",
 	'ports':['Platform X+','Platform X+'],
 	'mode':101,

@@ -100,7 +100,6 @@ def pre_midi(self,msg):
 		speak("Set 2")
 
 data = {
-	'type':'control',
 	'name' : "Akai Midi Mix",
 	'ports':['MIDI Mix','MIDI Mix'],
 	'toggle_type':1,

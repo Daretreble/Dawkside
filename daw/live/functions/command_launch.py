@@ -33,8 +33,11 @@ def command_launch(self,control,id,info,options):
 			c = 'tr_play_off'
 		control.matrix_in(id,c,action='unit')
 
+	## Deletes selected clip
+	if state and id == 1090:
+		self.clips.delete(self.track.index[0],self.scenes.index[0])
+
 	## Reloads Ableton OSC
 	if state and id == 1199:
 		speak("Ableton OSC API is reloading.")
 		self.get_data()
-		#self.client.send_message('/live/api/reload',())

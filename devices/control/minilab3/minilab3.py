@@ -110,7 +110,6 @@ for _ in [110,111,116,117,86,87,89,90]:
 	count += 1
 
 data = {
-	'type':'control',
 	'name' : "Arturia KeyLab Mk2",
 	'ports':['Minilab3','Minilab3'],
 	'touch_tolerance':20,

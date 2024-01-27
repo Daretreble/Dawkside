@@ -144,7 +144,6 @@ def pre_midi(self,msg):
 	"""
 	
 data = {
-	'type':'control',
 	'name' : "Akai APC Mini",
 	'ports':['APC MINI','APC MINI'],
 	'toggle_type':1,

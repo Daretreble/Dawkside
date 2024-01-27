@@ -42,7 +42,9 @@ def page_nav(self,action,*args):
 					main.switchtime = time.time()
 
 				if daw.short_name == 'live':
-					daw.client.send_message('/live/track/get/devices/name',(daw.track.index[0],0))
+					daw.datatmp['osc_tracking']['page_change'][1] = time.time()
+					daw.datatmp['osc_tracking']['page_change'][0] = True
+					#daw.client.send_message('/live/track/get/devices/name',(daw.track.index[0],0))
 				
 	else:
 		speak("Insert a plugin onto your track to enable page selection.")

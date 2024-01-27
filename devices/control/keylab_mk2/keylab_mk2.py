@@ -15,10 +15,10 @@ def control_init(self):
 	# Common defaults
 	self.default_layout['all'].update({
 		'permanent':{
-			110:[900,{}],
-			111:[911,{}],
-			114:[909,{}],
-			115:[910,{}],
+			114:[911,{}],
+			115:[900,{}],
+			110:[909,{}],
+			111:[910,{}],
 		},
 		0:{
 			'common':{
@@ -27,28 +27,26 @@ def control_init(self):
 				72:[70,{}],
 				73:[105,{}],
 				74:[106,{}],
-				75:[1199,{}],
-				76:[80,{}],
-				77:[81,{}],
+				75:[911,{}],
 				78:[104,{}],
 				79:[98,{}],
+				91:[1090,{}],
+				92:[104,{}],
 				93:[93,{}],
 				94:[94,{}],
 				95:[1100,{}],
+				501:[1100,{}],
+				502:[1090,{}],
+				503:[104,{}],
+
 			},
 			100:{},
 			101:{},
 			102:{},
-			130:{},
-			131:{
-				140:[868,{}],
-				141:[869,{}],
-				251:[251,{'type':'scale_nav'}],
-			},
 		},
 		1:{
 			'common':{
-				99:[81,{}],
+				75:[1199,{}],
 			},
 		},
 		2:{
@@ -85,15 +83,6 @@ def control_init(self):
 	for _ in range(16):
 		self.default_layout['all'][0][102].update({_+48:[_+360,{}]})
 	
-	# Add modes matrix
-	for i in range(130,132):
-		self.default_layout['all'][0][i].update({136:[866,{}]})
-		self.default_layout['all'][0][i].update({137:[867,{}]})
-		self.default_layout['all'][0][i].update({138:[864,{}]})
-		self.default_layout['all'][0][i].update({139:[865,{}]})
-		for j in range(64):
-			self.default_layout['all'][0][i].update({j:[j+800,{}]})
-
 def pre_midi(self,msg):
 	
 	## Unifies first 3 buttons on the top left to msg 0 to 2 because they follow the 8 buttons on the right.
@@ -132,16 +121,16 @@ going_out = {
 	'cc':{},
 	'nt':{
 		### Don't modify 53 and 54 since they're the layouts buttons
-		(48,9):[921,[]],
-		(49,9):[922,[]],
+		(50,9):[921,[]],
+		(51,9):[922,[]],
 		
-		# (110-113) Lower 4 pads buttons
-		(50,9):[110,[]],
-		(51,9):[111,[]],
-		(44,9):[112,[]],
-		(45,9):[113,[]],
-		(46,9):[114,[]],
-		(47,9):[115,[]],
+		# (110-115) lower assignable buttons apart from display buttons
+		(44,9):[110,[]],
+		(45,9):[111,[]],
+		(46,9):[112,[]],
+		(47,9):[113,[]],
+		(48,9):[114,[]],
+		(49,9):[115,[]],
 		
 		# (70-79) 8 buttons on the top, from left to right, starting on the third one, beside layout 2.
 		(53,0):[70,[]],
@@ -214,7 +203,6 @@ getting_in = {
 }
 
 data = {
-	'type':'control',
 	'name' : "Arturia KeyLab Mk2",
 	'ports':['MIDIIN2 (KeyLab mkII 61)','MIDIOUT2 (KeyLab mkII 61)'],
 	'fre_count':16,

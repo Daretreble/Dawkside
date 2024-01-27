@@ -1,5 +1,5 @@
 import time
-from functions.misc import invert_grid_position
+from functions.misc import invert_grid_position,find_position,normalized_from_min_max
 from functions.speak import speak
 
 def osc(self,*args):
@@ -15,6 +15,7 @@ def osc(self,*args):
 		self.transport.osc_manage(args[0],args[1])
 	
 	if args[0] == '/live/startup':
+		print('ok')
 		self.get_data()
 	
 	if args[0].startswith('/live/track/get/') and 'devices' not in args[0]:
@@ -34,8 +35,8 @@ def osc(self,*args):
 	
 	if args[0] == '/live/view/get/selected_track':
 		self.track.index[0] = args[1]
-		self.switchtime = time.time()
-		self.datatmp['track_change'] = True
+		self.datatmp['osc_tracking']['track_change'][1] = time.time()
+		self.datatmp['osc_tracking']['track_change'][0] = True
 
 	if args[0] == '/live/view/get/selected_scene':
 		self.scenes.index[0] = args[1]
@@ -58,6 +59,53 @@ def osc(self,*args):
 	if args[0] == '/live/device/get/parameters/name':
 		self.devices_manage(*args,action='get_parameter_names')
 
+	if args[0] == '/live/device/get/parameter/value':
+		param_tmp = self.plugins.params[args[3]+1]
+		value_out = normalized_from_min_max(args[4],param_tmp['min'],param_tmp['max']) 
+		param_number = args[3]+1
+		ids = self.fre['plugins']['ids']
+		if param_number in plugins.params:
+			plugins.params[param_number]['val'] = value_out
+			if param_number in ids:
+				for m in self.online['control']:
+					for pos in ids[param_number]:
+						m.fre_feedback(12,pos,value_out)
+			if param_number in self.fre['plugins']['btns']:
+				btns_tmp = self.fre['plugins']['btns'][param_number]
+				
+				for key,value in btns_tmp.items():
+					state = True if  value[0] <= value_out else False
+					
+				if state != self.fre['plugins']['btns'][param_number][key][1]:
+					# Action to trigger layout
+					for m in self.online['control']:
+						if key in m.matrix['plugin_buttons'][1]:
+							for l in m.matrix['plugin_buttons'][1][key]:
+								c = 'plugins_usrbtn_param_on' if state else 'plugins_usrbtn_param_off'
+								m.matrix_in(l,c,action='unit',direct=True)
+
+							self.fre['plugins']['btns'][param_number][key][1] = state
+						
+				
+				"""state = True if  v <= value_out else False
+					#print(p,state,self.fre['plugins']['btns'][param_number][count][2])
+					if state != self.fre['plugins']['btns'][param_number][count][2]:
+						# Action to trigger layouts
+						
+
+						self.fre['plugins']['btns'][param_number][count][2] = state
+					
+					count += 1
+			"""
+
+	if args[0] == '/live/device/get/parameter/value_string':
+		#print(find_position(args[3]))
+		param_tmp = self.plugins.params[args[3]+1]
+		#print(param_tmp['name'])
+		#speak(args[4])
+
+	
+	
 	if args[0] == '/live/device/get/parameters/value':
 		self.devices_manage(*args,action='get_parameter_values')
 

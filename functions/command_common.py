@@ -49,7 +49,7 @@ def command_common(self,control,id,info,options):
 			control.modes.scales_nav(1 if rotary_info[0] else -1,action='nav')
 	
 	## Daw select
-	if state and id in range(500,505) and id-500 < len(main.daws):
+	if state and id in range(420,425) and id-420 < len(main.daws):
 		pass
 
 	## Modes select

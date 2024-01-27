@@ -49,6 +49,6 @@ if __name__ == "__main__":
 	main.locked = [False, '']
 	
 	# Intro
-	output = f"Welcome to Dawkside.\n----------------------\n"
+	output = f"Welcome to Dawkside.\nWaiting for daws.\n"
 
 	speak(output, printout=True)
