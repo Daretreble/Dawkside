@@ -26,12 +26,10 @@ def devices_manage(self,*args,**kwargs):
 			self.datatmp['listens']['parameters'].append(tuple_tmp)
 			self.client.send_message('/live/device/start_listen/parameter/value',tuple_tmp)
 		
-		def delayed_load():
-			time.sleep(0.1)
-			plugins.user.manage()
-			plugins.user.refresh(action='full')
-			main.play_sound('ready')
-		Thread(target=delayed_load).start()					
+		time.sleep(0.1)
+		plugins.user.manage()
+		plugins.user.refresh(action='full')
+		main.play_sound('ready')
 	
 	if action == 'page_change':
 		page_change()

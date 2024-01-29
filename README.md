@@ -1,7 +1,7 @@
 # Dawkside
 A multi daw, multi devices, accessible platform for the visually impaired musicians like myself.
 
-Currently, Dawkside functions smoothly in conjunction with Reaper. Ableton Live integration is on the way.
+Currently, Dawkside functions smoothly in conjunction with Reaper and Ableton Live 12 Beta, which is now compatible with screen readers.
 
 # What it does
 
@@ -14,7 +14,7 @@ Currently, Dawkside functions smoothly in conjunction with Reaper. Ableton Live 
 - It also supports musical keyboards, letting you create transposition zones, keyboard splits, chord modes, etc.
 - Keyboard transposition and zones automatically adapts to the track's name. For example, violin 1 can be transposed in a way and saved. It'll transpose automatically the next time that track's name is encountered, for a particular plugin.
 - All these features are accessible through simple questionnaires answered with numbers.
-- Customizing an entire controller takes only a few minutes. The functionalities are shared among active DAWs. For instance, the undo button is in the same place in Reaper and Live.
+- Customizing an entire controller takes only a few minutes. The functionalities are shared among active DAWs. For instance, the undo button is in the same place in Reaper and Live. But they also can differ, depending on your needs. Everything is customizable.
 - You can modify all configurations using unencrypted JSON files (for advanced users).
 - Each button can contain sequences of actions. For instance, you can configure a button to move the mouse pointer to a specific area and produce a sound or send a MIDI note.
 - Fixed, momentary, and latch modes are available for each button. Pressed and released states can be configured independantly.
@@ -28,6 +28,11 @@ Currently, Dawkside functions smoothly in conjunction with Reaper. Ableton Live 
 - Icon Platform X+
 - mWave Chocolate foot switch
 - Korg D1
+
+# Limitations
+
+- As of today, the setup process is designed for advanced users. While it is accessible for individuals with visual impairments, like myself, the completion time may be extended if certain mandatory software has not been previously mastered.
+- There are some minor bugs in the system, as I address debugging only when personally encountering issues. Despite this, when Dawkside is running independently of digital audio workstations (DAWs), these bugs do not impact your workflow. Simply restarting Dawkside resolves any issues without affecting your daws.
 
 # Dawkside Setup Guide
 
