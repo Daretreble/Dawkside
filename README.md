@@ -32,7 +32,9 @@ Currently, Dawkside functions smoothly in conjunction with Reaper and Ableton Li
 # Limitations
 
 - As of today, the setup process is designed for advanced users. While it is accessible for individuals with visual impairments, like myself, the completion time may be extended if certain mandatory software has not been previously mastered.
-- There are some minor bugs in the system, as I address debugging only when personally encountering issues. Despite this, when Dawkside is running independently of digital audio workstations (DAWs), these bugs do not impact your workflow. Simply restarting Dawkside resolves any issues without affecting your daws.
+- There are some minor bugs in the system, as I address debugging only when personally encountering issues. Despite this, when Dawkside is running independently of digital audio workstations (DAWs), these bugs do not impact your workflow. Simply 
+restarting Dawkside resolves any issues without affecting your daws.
+
 
 # Dawkside Setup Guide
 

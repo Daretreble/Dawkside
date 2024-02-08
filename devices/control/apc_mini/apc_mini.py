@@ -20,24 +20,25 @@ def control_init(self):
 			117:[999,{}],			
 		},
 		0:{
-			'common':{
-				0:[300,{}],
-				1:[301,{}],
-				2:[302,{}],
-				3:[303,{}],
-				4:[304,{}],
-				5:[305,{}],
-				6:[306,{}],
-				7:[307,{}],
-			},
+			'common':{},
 			100:{},
 			101:{
 				8:[120,{}],
 				9:[121,{}],
 			},
 			102:{
-				40:[380,{}],
-				41:[381,{}],
+				8:[376,{}],
+				9:[377,{}],
+				14:[380,{}],
+				15:[381,{}],
+				56:[260,{}],
+				57:[261,{}],
+				58:[262,{}],
+				59:[263,{}],
+				60:[264,{}],
+				61:[265,{}],
+				62:[266,{}],
+				63:[267,{}],
 				122:[376,{}],
 				123:[377,{}],
 				120:[378,{}],
@@ -68,28 +69,22 @@ def control_init(self):
 	for _ in range(200,208):
 		self.default_layout['all'][0]['common'].update({_:[_,{}]})
 
-	# Add menus to layouts
+	#for _ in range(430,430+len(self.modes.sections)):
+		#self.default_layout['all'][2]['common'].update({_-360:[_,{}]})
+	#for _ in range(420,424):
+		#self.default_layout['all'][3]['common'].update({_-350:[_,{}]})
+	
+	# AddMenus
 	for _ in range(400,408):
 		self.default_layout['all'][0]['common'].update({_-330:[_,{}]})
-	for _ in range(410,410+len(self.main.outmodes)):
-		self.default_layout['all'][1]['common'].update({_-340:[_,{}]})
-	for _ in range(430,430+len(self.modes.sections)):
-		self.default_layout['all'][2]['common'].update({_-360:[_,{}]})
-	for _ in range(420,424):
-		self.default_layout['all'][3]['common'].update({_-350:[_,{}]})
 	
 	# Add fader buttons
 	for _ in range(300,308):
-		self.default_layout['all'][0]['common'].update({_-220:[_,{}]})
-	
-	# Add Plugins action buttons
-	for _ in range(32):
-		self.default_layout['all'][0][102].update({_+8:[_+260,{}]})
+		self.default_layout['all'][0]['common'].update({_-300:[_,{}]})
 	
 	# Add Plugins selection buttons
-	
-	for _ in range(16):
-		self.default_layout['all'][0][102].update({_+48:[_+360,{}]})
+	for _ in range(360,368):
+		self.default_layout['all'][0][102].update({_-344:[_,{}]})
 	
 	# Add modes matrix
 	for i in range(130,132):

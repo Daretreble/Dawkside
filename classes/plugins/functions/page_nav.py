@@ -24,7 +24,7 @@ def page_nav(self,action,*args):
 					self.page[0]+=args[0]
 				if self.page_type == 0:
 					if user.is_saved('page'):
-						self.page[1] = plugins.user_params[self.name][self.page[0]]['page_name']
+						self.page[1] = self.user_params[self.name][self.page[0]]['page_name']
 						if self.page[1] == '':
 							speak(f"Page {self.page[0]}")
 						else:
