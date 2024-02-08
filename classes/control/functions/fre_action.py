@@ -57,13 +57,13 @@ def fre_action(self,info):
 					
 					if outmode == 11:
 						if pos < 6:
-							if self.sendrecv['selected'] == 'send':
+							if self.daw_vars['sendrecv']['selected'] == 'send':
 								
 								# Send default value
 								if sn == 'reaper':
 									default_value = [0.716,f"/track/send/{pos+1}/volume"]
 							
-							if self.sendrecv['selected'] == 'recv':
+							if self.daw_vars['sendrecv']['selected'] == 'recv':
 								
 								# Receive default value
 								if sn == 'reaper':

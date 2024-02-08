@@ -39,7 +39,11 @@ def page_nav(self,action,*args):
 						speak("Out of range")
 				
 				if daw.short_name == 'reaper':
-					main.switchtime = time.time()
+					if daw.reapy_mode:
+						main.switchtime = time.time()
+					else:
+						daw.pVar = ['page_change']
+						daw.switchtime = time.time()
 
 				if daw.short_name == 'live':
 					daw.datatmp['osc_tracking']['page_change'][1] = time.time()

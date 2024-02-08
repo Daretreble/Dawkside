@@ -86,10 +86,6 @@ class Control:
 			else:
 				time.sleep(1)
 				self.daw_prepare()
-				for key,value in main.devices['keys'].items():
-					if main.devices['keys'][key].control_assoc.name == self.name:
-						self.keys_assoc = main.devices['keys'][key]
-						main.devices['keys'][key].routing_destination = self.daw
 			Thread(target=self.midi_loop).start()
 		Thread(target=delayed).start()
 

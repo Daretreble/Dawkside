@@ -11,8 +11,8 @@ def startup(self):
 			from reapy import reascript_api as rpr
 			self.reapy = reapy
 			self.rpr = rpr
-			Thread(target=self.reapy_loop).start()
 		
+		Thread(target=self.status_loop).start()
 		osc_set_client(self,socket.gethostbyname(socket.gethostname()),8000)
 		osc_set_server(self,'127.0.0.1',9000)
 		

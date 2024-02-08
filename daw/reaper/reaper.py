@@ -9,7 +9,7 @@ class Reaper:
 	""" Control Reaper calls. """
 	
 	def __init__(self,main):
-		self.reapy_mode = True
+		self.reapy_mode = False
 		self.name = "Reaper"
 		self.short_name = 'reaper'
 		self.developer = ["Cockos","www.reaper.fm"]
@@ -54,6 +54,6 @@ Reaper.command_launch = command_launch
 Reaper.get_data = get_data
 Reaper.midi_loop = midi_loop
 Reaper.osc = osc
-Reaper.reapy_loop = reapy_loop
 Reaper.refresh = refresh
 Reaper.startup = startup
+Reaper.status_loop = status_loop

@@ -69,6 +69,8 @@ def control_init(self):
 	# Add menus to layouts
 	for _ in range(400,408):
 		self.default_layout['all'][1]['common'].update({_-320:[_,{}]})
+	for _ in range(420,422):
+		self.default_layout['all'][3]['common'].update({_-340:[_,{}]})
 	
 	# Add fader buttons
 	for _ in range(300,308):

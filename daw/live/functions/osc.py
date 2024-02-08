@@ -15,7 +15,6 @@ def osc(self,*args):
 		self.transport.osc_manage(args[0],args[1])
 	
 	if args[0] == '/live/startup':
-		print('ok')
 		self.get_data()
 	
 	if args[0].startswith('/live/track/get/') and 'devices' not in args[0]:

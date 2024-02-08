@@ -1,4 +1,5 @@
 import math
+import os
 import pprint
 from functions.misc import pitch_convert
 
@@ -25,12 +26,21 @@ def manage(self):
 					if (_+1)+base in plugins.params:
 					
 						if daw.short_name == 'reaper':
-							param = daw.track.reapy_track.fxs[plugins.index[0]-1].params[_+base]
-							name = param.name
-							value = param
-							value_string = param.formatted
-							min = False
-							max = False
+							
+							if daw.reapy_mode:
+								param = daw.track.reapy_track.fxs[plugins.index[0]-1].params[_+base]
+								name = param.name
+								value = param
+								value_string = param.formatted
+								min = False
+								max = False
+							else:
+								param = plugins.params[_+base+1]
+								name = param['name']
+								value = param['val'] if 'val' in param else False
+								value_string = param['valstr']
+								min = False
+								max = False
 						
 						if daw.short_name == 'live':
 							param = plugins.params[_+base+1]

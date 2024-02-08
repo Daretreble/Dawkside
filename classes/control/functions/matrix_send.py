@@ -16,7 +16,7 @@ def matrix_send(self,info):
 	id = info[0][0]
 	value = info[2]
 	opt = info[0][1]
-	state = info[1]
+	state = info[1] if 'state' not in opt else opt['state']
 	mode = self.daw_vars['mode']
 	if '--show-command' in main.queries:
 		print(id,state,info,opt)
@@ -35,7 +35,7 @@ def matrix_send(self,info):
 					disp = modif('status')[1][0]-920
 			if state:
 				# Entering alternative pages
-				if disp in self.layouts['all']:
+				if disp in self.layouts['all'] or disp in self.layouts[daw.short_name]:
 					speak("layout "+str(disp))
 					self.layout_prepare(disp)
 										

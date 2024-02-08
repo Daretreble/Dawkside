@@ -25,7 +25,7 @@ class Plugins:
 		self.subname = ''
 		self.lastplugin = ''
 		self.page = [1,'',1]
-		self.page_type = 0
+		self.page_type = 1
 		self.param_count = 0
 		self.paramsbank = 1
 		self.last_touched = {

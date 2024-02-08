@@ -12,81 +12,66 @@ def control_init(self):
 		'live':{}
 	}
 
-	# Common defaults
-	self.default_layout['all'].update({
-		'permanent':{
-			110:[900,{}],
-			111:[911,{}],
-			114:[909,{}],
-			115:[910,{}],
-		},
+	# Reaper defaults
+	self.default_layout['reaper'].update({
 		0:{
 			'common':{
-				0:[1100,{}],
-			},
-			100:{},
-			101:{},
-			102:{},
-			130:{},
-			131:{
-				140:[868,{}],
-				141:[869,{}],
-				251:[251,{'type':'scale_nav'}],
-			},
+				0:[95,{}],
+				1:[80,{}],
+				10:[95,{}],
+				11:[98,{}],
+			}
 		},
 		1:{
 			'common':{
-				99:[81,{}],
-			},
-		},
-		2:{
-			'common':{},
-		},
-		3:{
-			'common':{},
+				0:[93,{}],
+			}
 		},
 	})
 
-	# Add encoders to display
-	for _ in range(200,208):
-		self.default_layout['all'][0]['common'].update({_:[_,{}]})
-
-	# Add menus to layouts
-	for _ in range(400,408):
-		self.default_layout['all'][1]['common'].update({_-320:[_,{}]})
-	for _ in range(410,410+len(self.main.outmodes)):
-		self.default_layout['all'][1]['common'].update({_-320:[_,{}]})
+	# Live defaults
+	self.default_layout['live'].update({
+		0:{
+			'common':{
+				0:[1100,{}],
+				1:[1090,{}],
+				2:[104,{}],
+				10:[1100,{}],
+				11:[98,{}],
+			}
+		},
+		1:{
+			'common':{
+				0:[1100,{}],
+				10:[1100,{}],
+			}
+		},
+	})
 	
-	# Add fader buttons
-	for _ in range(300,308):
-		self.default_layout['all'][0]['common'].update({_-220:[_,{}]})
-	
-	# Add Plugins action buttons
-	for _ in range(32):
-		self.default_layout['all'][0][102].update({_	:[_+260,{}]})
-	
-	# Add Plugins selection buttons
-	
-	for _ in range(16):
-		self.default_layout['all'][0][102].update({_+48:[_+360,{}]})
-	
-	# Add modes matrix
-	for i in range(130,132):
-		self.default_layout['all'][0][i].update({136:[866,{}]})
-		self.default_layout['all'][0][i].update({137:[867,{}]})
-		self.default_layout['all'][0][i].update({138:[864,{}]})
-		self.default_layout['all'][0][i].update({139:[865,{}]})
-		for j in range(64):
-			self.default_layout['all'][0][i].update({j:[j+800,{}]})
-
 def pre_midi(self,msg):
 	
-		print(msg)
+	pass
+
+	"""if msg.control == 3:
+		self.disp_toggle = True
+	elif msg.control != 13:
+		self.disp_toggle = False
+
+	if self.disp_toggle:
+		self.layout_active = 1
+	else:
+		self.layout_active = 0"""
 
 going_out = {
 	'cc':{
 		(0,0):[0,[]],
-		
+		(1,0):[1,[]],
+		(2,0):[2,[]],
+		(3,0):[921,{'state':True}],
+		(10,0):[10,[]],
+		(11,0):[11,[]],
+		(12,0):[12,[]],
+		(13,0):[921,{'state':False}],
 	},
 	'nt':{},
 	'pw':{},
@@ -96,5 +81,7 @@ data = {
 	'name' : "mWave Chocolate",
 	'ports':['USB-Midi',False],
 	'going_out':going_out,
-	'control_init':[control_init]
+	'control_init':[control_init],
+	'pre_midi':[pre_midi,True],
+	'disp_toggle':False,
 }

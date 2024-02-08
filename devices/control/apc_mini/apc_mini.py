@@ -31,14 +31,6 @@ def control_init(self):
 				9:[377,{}],
 				14:[380,{}],
 				15:[381,{}],
-				56:[260,{}],
-				57:[261,{}],
-				58:[262,{}],
-				59:[263,{}],
-				60:[264,{}],
-				61:[265,{}],
-				62:[266,{}],
-				63:[267,{}],
 				122:[376,{}],
 				123:[377,{}],
 				120:[378,{}],
@@ -85,6 +77,10 @@ def control_init(self):
 	# Add Plugins selection buttons
 	for _ in range(360,368):
 		self.default_layout['all'][0][102].update({_-344:[_,{}]})
+
+	# Add Plugins action buttons
+	for _ in range(260,292):
+		self.default_layout['all'][0][102].update({_-228:[_,{}]})
 	
 	# Add modes matrix
 	for i in range(130,132):
