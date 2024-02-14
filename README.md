@@ -1,7 +1,7 @@
 # Dawkside
 A multi daw, multi devices, accessible platform for the visually impaired musicians like myself.
 
-Currently, Dawkside functions smoothly in conjunction with Reaper and Ableton Live 12 Beta, which is now compatible with screen readers.
+Currently, Dawkside functions smoothly in conjunction with Reaper. Ableton Live integration is on the way.
 
 # What it does
 
@@ -9,12 +9,12 @@ Currently, Dawkside functions smoothly in conjunction with Reaper and Ableton Li
 - Each page allows you to add any plugin parameter onto 32 sliders or knobs.
 - You can add 32 buttons on each page. These buttons can control plugin settings, send notes or MIDI messages, use sysex, OSC, and predefined mouse movements.
 - Ssupports motorized controllers and adjusts to changes.
-- Non-motorized controllers can now use a pickup or direct mode, even if the controller doesn't support it naturally.
+- Even non-motorized controllers can now use a pickup or direct mode, even if your controller doesn't support it naturally.
 - It replicates the accessible version of Push's 64 scaled pads mode in Live, including its scales and a simple drum rack.
 - It also supports musical keyboards, letting you create transposition zones, keyboard splits, chord modes, etc.
 - Keyboard transposition and zones automatically adapts to the track's name. For example, violin 1 can be transposed in a way and saved. It'll transpose automatically the next time that track's name is encountered, for a particular plugin.
 - All these features are accessible through simple questionnaires answered with numbers.
-- Customizing an entire controller takes only a few minutes. The functionalities are shared among active DAWs. For instance, the undo button is in the same place in Reaper and Live. But they also can differ, depending on your needs. Everything is customizable.
+- Customizing an entire controller takes only a few minutes. The functionalities are shared among active DAWs (Digital Audio Workstations). For instance, the undo button is in the same place in Reaper and Live.
 - You can modify all configurations using unencrypted JSON files (for advanced users).
 - Each button can contain sequences of actions. For instance, you can configure a button to move the mouse pointer to a specific area and produce a sound or send a MIDI note.
 - Fixed, momentary, and latch modes are available for each button. Pressed and released states can be configured independantly.
@@ -26,19 +26,11 @@ Currently, Dawkside functions smoothly in conjunction with Reaper and Ableton Li
 - AKAI Midi Mix
 - Arturia Keylab Mk2
 - Icon Platform X+
-- mWave Chocolate foot switch
 - Korg D1
-
-# Limitations
-
-- As of today, the setup process is designed for advanced users. While it is accessible for individuals with visual impairments, like myself, the completion time may be extended if certain mandatory software has not been previously mastered.
-- There are some minor bugs in the system, as I address debugging only when personally encountering issues. Despite this, when Dawkside is running independently of digital audio workstations (DAWs), these bugs do not impact your workflow. Simply 
-restarting Dawkside resolves any issues without affecting your daws.
-
 
 # Dawkside Setup Guide
 
-This guide will walk you through the process of setting up Dawkside with Reaper on Windows. We'll start by installing LoopMidi, configuring Python, and setting up Reaper with Dawkside.
+This guide will walk you through the process of setting up Dawkside with Reaper on Windows.
 
 ## Prerequisites
 
@@ -46,18 +38,21 @@ This guide will walk you through the process of setting up Dawkside with Reaper 
 - Administrative privileges
 - Internet connection
 
-## Step 1: Install LoopMidi and create new midi ports for Reaper.
+## Reapy mode or OSC Only mode
+Dawkside offers two modes for use with Reaper: Reapy mode and OSC Only mode. The OSC Only mode is simpler to install and more stable, but it is more limited in its functionality. The Reapy mode, on the other hand, requires a more complex installation process involving the Reapy python script, but it offers greater flexibility and advanced features.
+
+## Step 1: Install LoopMidi and create new midi ports for Reaper. (OSC Mode and Reapy Mode)
 
 1. Download and install LoopMidi from [LoopMidi's official website](https://www.tobias-erichsen.de/software/loopmidi.html).
 2. In LoopMidi, create two virtual MIDI ports and name them 'reaper_in' and 'reaper_out'.
 
 
 
-## Step 2: Install Python
+## Step 2: Install Python (Reapy Mode only)
 
 1. Download and install Python 3.9.7 or any Python version supported by Reaper from the [Python website](https://www.python.org/downloads/).
 
-## Step 3: Install python-reapy
+## Step 3: Install python-reapy (Reapy Mode only)
 
 1. Open a command prompt.
 2. Run the following command to install the `python-reapy` package:
@@ -69,12 +64,12 @@ This guide will walk you through the process of setting up Dawkside with Reaper 
 ## Step 4: Copy Dawkside ReaperOSC File
 
 1. Locate the setup folder of the Dawkside package.
-2. Copy the file named 'Dawkside.ReaperOSC' from the setup folder.
+2. Copy the file named 'Dawkside Reapy.ReaperOSC' (Reapy Mode) or 'Dawkside.ReaperOSC' (OSC Mode),  from the setup folder.
 3. Paste it into the OSC folder of your Reaper's installation directory. Typically, this directory is located at C:\Users\[your name]\AppData\Roaming\REAPER\OSC.
 
 ## Step 5: Run Reaper 64-bit with the OSARA extension.
 
-## Step 6: Load reapy_config.py Script
+## Step 6: Load reapy_config.py Script (Reapy Mode only)
 
 1. Open the actions dialog box in Reaper.
 2. Load the script called 'reapy_config.py' from the setup folder of the Dawkside package.
@@ -88,7 +83,7 @@ This guide will walk you through the process of setting up Dawkside with Reaper 
 2. Navigate to the Control/OSC/web section.
 3. Add a new OSC control surface with the following details:
 	- Device name: Dawkside
-	- Pattern config file: Dawkside
+	- Pattern config file: Dawkside Reapy (Reapy Mode) or Dawkside (OSC Mode)
 	- Mode: Configure IP + local port
 	- Device port: 9000
 	- Device IP: 127.0.0.1
