@@ -18,7 +18,8 @@ def plugin_nav(self,action,*args):
 					self.index[0] = index_tmp
 					speak(f"{self.index[0]} {self.plugins_list[self.index[0]-1]}")
 					if daw.short_name == 'reaper':
-						main.switchtime = time.time()
+						if daw.reapy_mode:
+							main.switchtime = time.time()
 					if daw.short_name == 'live':
 						daw.client.send_message('/live/track/get/devices/name',(daw.track.index[0],0))
 			else:
@@ -36,6 +37,15 @@ def plugin_nav(self,action,*args):
 			else:
 				if nfxs == 1:
 					speak(f"{self.name} stands alone as the sole plugin gracing this track; there are no other plugins to traverse.")
+				elif daw.short_name == 'reaper' and daw.reapy_mode == False:
+					if self.index[0]+dir >= 1:
+						self.index[0]+=dir
+						daw.client.send_message('/device/fxparam/count',0)
+						daw.client.send_message('/device/fx/select',self.index[0])
+						daw.switchtime = time.time()
+						daw.pVar = ['trackreload','plugin_select']
+					else:
+						speak(self.name+" nothing before.")
 				elif self.index[0] + dir in range(1,self.nfxs+1):
 					self.index[0]+=dir
 					speak(f"{self.index[0]} {self.plugins_list[self.index[0]-1]}")

@@ -18,7 +18,6 @@ def fre_feedback(self,*args):
 			fstmp[2] = input_value
 			if fstmp[0]:
 				if fstmp[1] != fstmp[2]:
-					print(pos)
 					fstmp[0] = False
 	
 		if self.getting_in and pos+200 in self.getting_in:

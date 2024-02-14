@@ -35,6 +35,14 @@ class Reaper:
 		self.track = Track(self)
 		self.tracks = Tracks(self)
 		self.plugins = Plugins(self)
+		if not self.reapy_mode:
+			self.plugins.sendrecv_tmp = {}
+			for cat in ['send','recv']:
+				self.plugins.sendrecv_tmp[cat] = {}
+				for _ in range(6):
+					self.plugins.sendrecv_tmp[cat][_+1] = {'pitch':[],'name':'','valstr':''}
+					
+
 		self.transport= Transport(self)
 		self.online = {'control':[],'keys':[]}
 		self.modes = {

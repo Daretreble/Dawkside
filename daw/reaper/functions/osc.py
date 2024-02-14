@@ -61,18 +61,30 @@ def osc(self,*args):
 	if args[0][:12] in['/track/send/','/track/recv/']:
 		sr_type = args[0][7:11]
 		sr_tags = args[0][12:].split('/')
-		sr_id = int(sr_tags[0])
+		sr_id = int(sr_tags[0])		
 		
+		if len(sr_tags) == 3:
+			sr_cat = sr_tags[1]+'/'+sr_tags[2]
+		else:
+			sr_cat = sr_tags[1]
+		
+		if not self.reapy_mode:
+		
+			if sr_cat == 'name':
+				plugins.sendrecv_tmp[sr_type][sr_id]['name'] = args[1]
+
+			if sr_cat == 'volume/str':
+				plugins.sendrecv_tmp[sr_type][sr_id]['valstr'] = args[1]
+
+			if sr_cat == 'volume':
+				value_out = round(args[1],4)
+				plugins.sendrecv_tmp[sr_type][sr_id]['pitch'] = [value_out,False]
+
 		if sr_id-1 in self.fre['track'][sr_type]:
-			
-			if len(sr_tags) == 3:
-				sr_cat = sr_tags[1]+'/'+sr_tags[2]
-			else:
-				sr_cat = sr_tags[1]
+
 			if sr_cat == 'volume':
 				value_out = round(args[1],4)
 				self.fre['track'][sr_type][sr_id-1]['pitch'] = [value_out,False]
-				print(self.switch_on)
 				if not self.switch_on:
 					for m in self.online['control']:
 						send_recv_sel = m.daw_vars['sendrecv']['selected']
@@ -84,6 +96,11 @@ def osc(self,*args):
 		
 	## Plugins osc
 	
+	# Get plugin index
+	if self.reapy_mode == False and args[0] == '/fx/number/str':
+		index_tmp = int(args[1]) if isinstance(args[0],int) else 1
+		plugins.index[0] = index_tmp
+
 	# Get plugin name
 	if args[0] == '/fx/name':
 		if args[1] == '':
@@ -98,6 +115,9 @@ def osc(self,*args):
 			plugins.fullname = "".join(re.split("\(|\)|\[|\]", pf[0])[::2])
 			plugins.name = plugins.fullname.replace(' ','').lower()
 			plugins.name = re.sub('[\W_]+', '',plugins.name)
+			if 'plugin_select' in self.pVar:
+				speak(plugins.name)
+				self.pVar.remove('plugin_select')
 	
 	# Get parameter  valuees
 	if args[0].startswith('/fxparam'):
@@ -146,7 +166,6 @@ def osc(self,*args):
 								
 						
 						"""state = True if  v <= value_out else False
-							#print(p,state,self.fre['plugins']['btns'][param_number][count][2])
 							if state != self.fre['plugins']['btns'][param_number][count][2]:
 								# Action to trigger layouts
 								

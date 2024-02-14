@@ -1,5 +1,8 @@
 import os
+import sys
 import time
+import pprint
+import re
 from threading import Thread
 from functions.speak import speak
 
@@ -37,10 +40,11 @@ def status_loop(self,*args):
 			except AttributeError:
 				#os.system('cls')
 				speak("Exiting. Close Reaper's new version dialog box and restart Dawkside.",printout=True)
-				os._exit(0)
+				sys.exit()
 			except ConnectionResetError:
 				os.system('cls')
 				speak("Exiting Reaper.",printout=True)
+				sys.exit(0)
 			except IndexError:
 				track = self.reapy.Project().master_track
 			if track:
@@ -75,8 +79,8 @@ def status_loop(self,*args):
 				reset = 0
 			else:
 				reset += 1
-			if reset > 15:
-				
+			if reset > 30:
+
 				# Check new sends
 				sendTmp = track.n_sends
 				recvTmp = track.n_receives
@@ -101,13 +105,21 @@ def status_loop(self,*args):
 				self.pVar = []
 				plugins.user.manage()
 				plugins.user.refresh(action='full')
-			
+				self.main.play_sound('ready')
+
 			if 'trackreload' in self.pVar and time.time()-self.switchtime > 0.4:
 				self.pVar = []
 				self.switchtime = time.time()
 				def delayed_load():
 					time.sleep(0.2)
 					count = 0
+					self.fre['track']['send'] = {}
+					self.fre['track']['recv'] = {}
+					for cat in ['send','recv']:
+						for key,value in self.plugins.sendrecv_tmp[cat].items():
+							pattern = r"(Send|Recv) \d+"
+							if not re.match(pattern,value['name']):
+								self.fre['track'][cat][key-1] = value
 					for key,value in plugins.params.items():
 						if value['name'] == '':
 							if key in plugins.params:
@@ -117,6 +129,7 @@ def status_loop(self,*args):
 							count += 1
 					plugins.param_count = count
 					plugins.user.manage()
+					self.track.refresh(action='full')
 					plugins.user.refresh(action='full')
 					self.switch_on = False
 					self.main.play_sound('ready')

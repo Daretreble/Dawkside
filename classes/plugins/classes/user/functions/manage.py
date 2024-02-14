@@ -1,6 +1,5 @@
 import math
 import os
-import pprint
 from functions.misc import pitch_convert
 
 def manage(self):
@@ -38,7 +37,7 @@ def manage(self):
 								param = plugins.params[_+base+1]
 								name = param['name']
 								value = param['val'] if 'val' in param else False
-								value_string = param['valstr']
+								value_string = param['valstr'] if 'valstr' in param else ''
 								min = False
 								max = False
 						
