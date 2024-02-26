@@ -27,7 +27,7 @@ def midi_loop(self):
 				if msg.channel == 0:
 				
 					if event_type == 'pitchwheel':
-						self.routing_destination.midiout(msg)
+						self.routing_destination.routing.midiout(msg)
 					
 					if event_type in['note_on','note_off']:
 					
@@ -56,7 +56,7 @@ def midi_loop(self):
 												velo = velotmp if velotmp in range(0,128) else 127
 										
 										if self.routing_destination:
-											self.routing_destination.midiout(MidiMsg(event_type,note=noteTmp,channel=tmp[4],velocity=velo))
+											self.routing_destination.routing.midiout(MidiMsg(event_type,note=noteTmp,channel=tmp[4],velocity=velo))
 										
 										
 
@@ -82,7 +82,7 @@ def midi_loop(self):
 								for tmp in self.zones_config:
 									cc_passed = False
 									if tmp[0] and tmp[5]:
-										self.routing_destination.midiout(MidiMsg(event_type,control=64,channel=tmp[4],value=value))
+										self.routing_destination.routing.midiout(MidiMsg(event_type,control=64,channel=tmp[4],value=value))
 						
 						if cc_passed:
-							self.routing_destination.midiout(msg)
+							self.routing_destination.routing.midiout(msg)

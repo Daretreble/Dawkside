@@ -44,8 +44,8 @@ class Keys:
 	def panic(self):
 
 		for n in range(128):
-			self.routing_destination.routing.midiout(MidiMsg('note_off',note=n,channel=0,velocity=0))
-		self.routing_destination.routing.midiout(MidiMsg('control_change',control=120,channel=0,value=127))
+			self.routing_destination.midiout(MidiMsg('note_off',note=n,channel=0,velocity=0))
+		self.routing_destination.midiout(MidiMsg('control_change',control=120,channel=0,value=127))
 			
 Keys.zone_manage = zone_manage
 Keys.midi_loop = midi_loop

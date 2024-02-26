@@ -20,6 +20,7 @@ class Main:
 		self.devices = {
 			'control':{},
 			'keys':{},
+			'ports':{},
 		}
 		self.modifiers_data = {
 			'status':[False,[]]

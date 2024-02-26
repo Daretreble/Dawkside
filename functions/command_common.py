@@ -24,7 +24,7 @@ def command_common(self,control,id,info,options):
 	## Debug
 	if state and id == 999:
 		os.system('cls')
-		pprint.pprint(self.fre['track'])
+		pprint.pprint(main.devices)
 
 	## All modifiers
 	if id not in range(921,924) and id in main.modifiers_data['list']:
@@ -178,4 +178,11 @@ def command_common(self,control,id,info,options):
 			else:
 				control.keys_assoc.zone_manage(id-(700+inc),dir,action='zonetranspose')
 
+	## Routing functions
+	if state and id == 750:
+		control.daw_routing()
+
+	if state and id == 751:
+		control.keys_assoc.routing_destination = main.devices['ports'][options['destination']].port
+	
 	self.command_launch(control,id,info,options)

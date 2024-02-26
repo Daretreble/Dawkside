@@ -37,7 +37,7 @@ if __name__ == "__main__":
 	# Initialize Main class for global settings
 	main = Main()
 
-	os.system('cls')
+	#os.system('cls')
 	main.play_sound('intro')
 
 	# Load DAWs

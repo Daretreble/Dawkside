@@ -71,6 +71,10 @@
 710=713: Zone 1-4 transpose Up
 720-723: Zone 1-4 direct function button
 
+--- Routing functions ---
+750: Default routing
+751: Other routing (use routing port name as options)
+
 --- Play modes zones ---
 800-863: Main modes matrix
 864: Transpose fine down

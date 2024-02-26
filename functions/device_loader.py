@@ -6,13 +6,14 @@ import pprint
 
 from classes.control.control import Control
 from classes.keys.keys import Keys
+from classes.ports.ports import Ports
 
 def device_loader(main):
 	""" Initializes devices. """
 	
 	inports = mido.get_input_names()
 	
-	for cat in ['control', 'keys']:
+	for cat in ['control', 'keys','ports']:
 		folder_path = os.path.join('devices', cat)
 		subfolders = [f for f in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, f))]
 		stripped_subfolders = [f for f in subfolders if f != '__pycache__']
@@ -34,3 +35,5 @@ def device_loader(main):
 					main.devices[cat][d] = Control(main, data)
 				elif cat == 'keys':
 					main.devices[cat][d] = Keys(main,data)
+				elif cat == 'ports':
+					main.devices[cat][d] = Ports(main,data)

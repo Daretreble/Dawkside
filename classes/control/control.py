@@ -89,6 +89,12 @@ class Control:
 			Thread(target=self.midi_loop).start()
 		Thread(target=delayed).start()
 
+	def daw_routing(self):
+		for key,value in self.main.devices['keys'].items():
+			if self.main.devices['keys'][key].control_assoc.name == self.name:
+				self.keys_assoc = self.main.devices['keys'][key]
+				self.main.devices['keys'][key].routing_destination = self.daw.routing
+
 Control.daw_prepare = daw_prepare
 Control.layout_prepare = layout_prepare
 Control.fre_action = fre_action
