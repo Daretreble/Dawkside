@@ -1,10 +1,6 @@
 import sys
 import os
 import time
-import contextlib
-with contextlib.redirect_stdout(None):
-	import pygame
-	pygame.init()
 from functions.speak import speak
 
 class Main:
@@ -97,5 +93,6 @@ class Main:
 					status[1].remove(id)
 			
 	def play_sound(self,sound):
-		pygame.mixer.music.load(f"media\sounds\{sound}.mp3")
-		pygame.mixer.music.play()
+		pass
+		#sound_file_path = 'media////sounds////'+sound+'.mp3'
+		#playsound(sound_file_path)

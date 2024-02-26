@@ -83,7 +83,7 @@ def get_data(self,*args):
 			if 'track' not in args[0]:
 				self.client.send_message('/device/track/follows/last_touched',1.0)
 				#self.client.send_message('/action',41743)
-			
+
 		if 'fx' in args[0]:
 
 			if reapy_track.n_fxs > 0:
@@ -157,4 +157,5 @@ def get_data(self,*args):
 				plugins.name = ''
 			plugins.user.refresh(action='full')	
 	
-	main.play_sound('ready')
+	speak('Ready')
+	#main.play_sound('ready')

@@ -87,11 +87,12 @@ def fre_process(self,info):
 				fstmp[0] = True
 				fstmp[2] = fstmp[1]
 				if tolerated:
-					main.play_sound('tick')
+					speak('click')
+					#main.play_sound('tick')
 			else:
 				if time.time() - self.fader_state[pos][4] > 0.2:
 					if tolerated:
-						main.play_sound('low' if fstmp[1] < fstmp[2] else 'high')
+						speak('up' if fstmp[1] < fstmp[2] else 'down')
 					self.fader_state[pos][4] = time.time()
 		
 	if fre_tmp and (not pickup or (pickup and fstmp[0])):

@@ -9,7 +9,7 @@ class Reaper:
 	""" Control Reaper calls. """
 	
 	def __init__(self,main):
-		self.reapy_mode = False
+		self.reapy_mode = True
 		self.name = "Reaper"
 		self.short_name = 'reaper'
 		self.developer = ["Cockos","www.reaper.fm"]

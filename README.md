@@ -1,7 +1,7 @@
 # Dawkside
 A multi daw, multi devices, accessible platform for the visually impaired musicians like myself.
 
-Currently, Dawkside functions smoothly in conjunction with Reaper. Ableton Live integration is on the way.
+Currently, Dawkside functions smoothly in conjunction with Reaper and Ableton Live 12 beta, which is now accessible to screen readers).
 
 # What it does
 

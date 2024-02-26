@@ -38,9 +38,8 @@ def status_loop(self,*args):
 			try:
 				track = self.reapy.Project().selected_tracks[0]
 			except AttributeError:
-				#os.system('cls')
-				speak("Exiting. Close Reaper's new version dialog box and restart Dawkside.",printout=True)
-				sys.exit()
+				time.sleep(5)
+				track = self.reapy.Project().selected_tracks[0]
 			except ConnectionResetError:
 				os.system('cls')
 				speak("Exiting Reaper.",printout=True)
@@ -105,7 +104,8 @@ def status_loop(self,*args):
 				self.pVar = []
 				plugins.user.manage()
 				plugins.user.refresh(action='full')
-				self.main.play_sound('ready')
+				speak('Ready')
+				#self.main.play_sound('ready')
 
 			if 'trackreload' in self.pVar and time.time()-self.switchtime > 0.4:
 				self.pVar = []
@@ -132,7 +132,8 @@ def status_loop(self,*args):
 					self.track.refresh(action='full')
 					plugins.user.refresh(action='full')
 					self.switch_on = False
-					self.main.play_sound('ready')
+					speak('Ready')
+					#self.main.play_sound('ready')
 				Thread(target=delayed_load).start()
 				self.client.send_message('/device/fxparam/count',256)
 
