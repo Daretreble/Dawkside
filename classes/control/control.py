@@ -94,6 +94,7 @@ class Control:
 			if self.main.devices['keys'][key].control_assoc.name == self.name:
 				self.keys_assoc = self.main.devices['keys'][key]
 				self.main.devices['keys'][key].routing_destination = self.daw.routing
+				self.main.devices['keys'][key].panic()
 
 Control.daw_prepare = daw_prepare
 Control.layout_prepare = layout_prepare

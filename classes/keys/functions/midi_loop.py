@@ -12,7 +12,7 @@ def midi_loop(self):
 		routing_destination = self.routing_destination
 		passed = True
 
-		if self.act:
+		if self.act and self.routing_destination:
 
 			if self.pre_midi:
 				self.pre_midi[0](self,msg)

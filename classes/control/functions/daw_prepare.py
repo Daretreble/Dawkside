@@ -31,5 +31,4 @@ def daw_prepare(self):
 	}
 
 	self.mode_select(mode=[1,self.daw_vars['mode']],speak=True)
-	print('----')
 	self.daw_routing()

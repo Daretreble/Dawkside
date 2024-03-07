@@ -183,6 +183,12 @@ def command_common(self,control,id,info,options):
 		control.daw_routing()
 
 	if state and id == 751:
-		control.keys_assoc.routing_destination = main.devices['ports'][options['destination']].port
+		if 'destination' not in options:
+			speak("No destination key in dictionnary")
+		elif options['destination'] not in main.devices['ports']:
+			speak("That port is not created.")
+		else:
+			control.keys_assoc.routing_destination = main.devices['ports'][options['destination']].port
+			control.keys_assoc.panic()
 	
 	self.command_launch(control,id,info,options)
