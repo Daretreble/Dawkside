@@ -16,7 +16,7 @@ def startup(self):
 		osc_set_client(self,socket.gethostbyname(socket.gethostname()),8000)
 		osc_set_server(self,'127.0.0.1',9000)
 		
-		self.routing = MidiSurfaces(['reaper_out','reaper_in'],self.main)
+		self.routing = MidiSurfaces(['reaper_out','reaper_in'],self.main,'startswith')
 		Thread(target=self.midi_loop).start()					
 		
 		def refresh_devices():

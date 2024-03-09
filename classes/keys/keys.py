@@ -17,7 +17,7 @@ class Keys:
 		self.__dict__.update(data)
 		if 'control_assoc' in data['settings'] and data['settings']['control_assoc'] in main.devices['control']:
 			self.control_assoc = main.devices['control'][data['settings']['control_assoc']]
-		self.port = MidiSurfaces(self.ports,self.main				)
+		self.port = MidiSurfaces(self.ports,self.main,self.ports[2])
 		if self.port.inport:
 			Thread(target=self.midi_loop).start()
 			if self.keys_init:

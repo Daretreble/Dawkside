@@ -125,16 +125,20 @@ def manage(self):
 					
 					for _ in paramslist:
 						if _ <= plugins.param_count:
-							param = daw.track.reapy_track.fxs[plugins.index[0]-1].params[_-1]
-							plugins.params[_].update({
-								'name':param.name,
-								'prm':_,
-								'val':round(param,4),
-								'valstr':param.formatted,
-							})
+							if daw.short_name == 'reaper':
+								param = daw.track.reapy_track.fxs[plugins.index[0]-1].params[_-1]
+								plugins.params[_].update({
+									'name':param.name,
+									'prm':_,
+									'val':round(param,4),
+									'valstr':param.formatted,
+								})
 					
 					for key,value in data.items():
-						prmtmp = value['prm']
+						if daw.short_name == 'reaper':
+							prmtmp = value['prm']
+						if daw.short_name == 'live':
+							prmtmp = value['prm']
 						if prmtmp <= plugins.param_count:
 							param = plugins.params[prmtmp]
 							row = (math.floor(key/8)+1)
@@ -145,6 +149,11 @@ def manage(self):
 									'name':tmpname,
 									'prm':value['prm'],
 								}
+							if daw.short_name == 'live':
+								daw.fre['plugins']['faders'][key].update({
+									'min':param['min'],
+									'max':param['max'],
+								})
 							daw.fre['plugins']['faders'][key].update({
 								'pitch':[param['val'],param['val'],pitch_convert('v2p',param['val'])],
 							})

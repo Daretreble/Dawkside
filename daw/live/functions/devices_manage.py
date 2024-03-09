@@ -20,6 +20,7 @@ def devices_manage(self,*args,**kwargs):
 		for _ in self.datatmp['listens']['parameters']:
 			self.client.send_message('/live/device/stop_listen/parameter/value',_)
 		self.datatmp['listens']['parameters'] = []
+		time.sleep(0.05)
 		page_tmp = (self.plugins.page[0]-1) * 8
 		for _ in range(page_tmp,page_tmp+8):
 			tuple_tmp = (self.track.index[0],self.plugins.index[0]-1,_)
@@ -52,6 +53,13 @@ def devices_manage(self,*args,**kwargs):
 			plugins.fullname = plugin_tmp
 			plugins.name = plugins.fullname.replace(' ','').lower()
 			plugins.name = re.sub('[\W_]+', '',plugins.name)
+			if plugins.name not in plugins.user_params:
+				plugin_settings_path = os.path.join('plugins','settings',self.short_name,plugins.name+'.json')
+				if os.path.isfile(plugin_settings_path):
+					with open(plugin_settings_path, 'r') as file:
+						tmp_data = json.load(file)
+						plugins.user_params[plugins.name] = keys_to_int(tmp_data)
+
 			self.client.send_message('/live/device/get/parameters/name',(self.track.index[0],plugins.index[0]-1))
 		else:
 			plugins.act = False

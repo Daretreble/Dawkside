@@ -42,7 +42,9 @@ def control_init(self):
 			},
 			100:{},
 			101:{},
-			102:{},
+			102:{
+				88:[380,{}],
+			},
 		},
 		1:{
 			'common':{
@@ -55,6 +57,9 @@ def control_init(self):
 				81:[377,{}],
 				82:[378,{}],
 				83:[379,{}],
+			},
+			102:{
+				88:[381,{}],
 			},
 		},
 		3:{
@@ -154,7 +159,7 @@ going_out = {
 		(95,0):[95,[]],
 		(96,0):[96,[]],
 
-		# 80-87) 8 buttons on the right, from left to right
+		# 80-88) 8 buttons on the right, from left to right
 		(24,0):[80,[]],
 		(25,0):[81,[]],
 		(26,0):[82,[]],
@@ -163,6 +168,7 @@ going_out = {
 		(29,0):[85,[]],
 		(30,0):[86,[]],
 		(31,0):[87,[]],
+		(51,0):[88,[]],
 
 	},
 	'pw':{},
@@ -206,7 +212,7 @@ getting_in = {
 
 data = {
 	'name' : "Arturia KeyLab Mk2",
-	'ports':['MIDIIN2 (KeyLab mkII 61)','MIDIOUT2 (KeyLab mkII 61)'],
+	'ports':['MIDIIN2 (KeyLab mkII 61)','MIDIOUT2 (KeyLab mkII 61)','startswith'],
 	'fre_count':16,
 	'touch_tolerance':20,
 	'getting_in':getting_in,

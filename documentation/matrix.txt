@@ -109,4 +109,5 @@ ABLETON LIVE EXCLUSIVES
 1090: Delete selected clip in selected clip slot
 1091: Fires selected clip slot
 1100: Toggle record in session mode
+1198: Reloads selected track's devices
 1199: Reloads AbletonOSC script

@@ -11,7 +11,7 @@ def process_loop(self,*args):
 	track = self.track
 	id = 0
 	self.switchtime = time.time()
-	loop_switchtime = time.time()
+	self.loop_switchtime = time.time()
 	reset = 0
 	
 	while True and self.main.running_threads_on:
@@ -45,11 +45,10 @@ def process_loop(self,*args):
 				self.client.send_message('/live/track/get/devices/name',(track.index[0]))
 			Thread(target=track_load).start()
 		
-		# Sample of action each 2 seconds
-		"""
-		if time.time()-loop_switchtime > 2:
-			pass
-			loop_switchtime = time.time()
-		"""
+		## Timed actions
+		if time.time()-self.loop_switchtime > 3:
+			self.pVar = ['devices_check']
+			self.client.send_message('/live/track/get/devices/name',(track.index[0]))
+			self.loop_switchtime = time.time()
 		
 		time.sleep(0.1)

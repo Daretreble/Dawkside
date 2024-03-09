@@ -102,7 +102,7 @@ for _ in range(300,308):
 
 data = {
 	'name' : "Icon Platform X+",
-	'ports':['Platform X+','Platform X+'],
+	'ports':['Platform X+','Platform X+','startswith'],
 	'mode':101,
 	'outmode':11,
 	'fre_count':16,

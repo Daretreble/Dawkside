@@ -101,7 +101,7 @@ def pre_midi(self,msg):
 
 data = {
 	'name' : "Akai Midi Mix",
-	'ports':['MIDI Mix','MIDI Mix'],
+	'ports':['MIDI Mix','MIDI Mix','startswith'],
 	'toggle_type':1,
 	'fre_count':32,
 	'getting_in':getting_in,

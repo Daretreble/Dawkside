@@ -4,7 +4,11 @@ def value_from_normalized(value, min_val, max_val):
 	return round(value * (max_val - min_val) + min_val, 4)
 
 def normalized_from_min_max(value,min_val,max_val):
-	return round((value - min_val) / (max_val - min_val),4)
+	try:
+		return round((value - min_val) / (max_val - min_val),4)
+	except ZeroDivisionError:
+		print('Misc.py line 46 error')
+		return 0.0
 
 def convert_to_appropriate_type(input_str):
 	

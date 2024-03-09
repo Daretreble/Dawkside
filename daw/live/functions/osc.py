@@ -1,4 +1,5 @@
 import time
+import os
 from functions.misc import invert_grid_position,find_position,normalized_from_min_max
 from functions.speak import speak
 
@@ -33,6 +34,7 @@ def osc(self,*args):
 
 	
 	if args[0] == '/live/view/get/selected_track':
+		self.loop_switchtime = time.time()
 		self.track.index[0] = args[1]
 		self.datatmp['osc_tracking']['track_change'][1] = time.time()
 		self.datatmp['osc_tracking']['track_change'][0] = True
@@ -40,10 +42,14 @@ def osc(self,*args):
 	if args[0] == '/live/view/get/selected_scene':
 		self.scenes.index[0] = args[1]
 		self.client.send_message('/live/clip_slot/get/has_clip',(self.track.index[0],self.scenes.index[0]))
-		speak(self.scenes.index[0])
+		#speak(self.scenes.index[0]+1)
 	
-	if args[0] == '/live/clip_slot/get/has_clip' and args[3] and args[1] == self.track.index[0] and args[2] == self.scenes.index[0]:
-		main.play_sound('high')
+	if args[0] == '/live/clip_slot/get/has_clip' and args[1] == self.track.index[0] and args[2] == self.scenes.index[0]:
+		selected_scene_output = str(self.scenes.index[0]+1)
+		if args[3]:
+			speak(selected_scene_output+' clip')
+		else:
+			speak(selected_scene_output+' empty')
 	
 	if args[0] == '/live/song/get/num_tracks':
 		tracks.num = args[1]
@@ -53,7 +59,16 @@ def osc(self,*args):
 	
 	## Get devices data
 	if args[0] == '/live/track/get/devices/name':
-		self.devices_manage(*args,action='get_devices')
+		if 'devices_check' in self.pVar:
+			plugins_tmp = []
+			for device in args[2:]:
+				plugins_tmp.append([device])
+			if not plugins_tmp == plugins.plugins_list:
+				self.devices_manage(*args,action='get_devices')
+				speak("Plugins list updated.")
+			self.pVar = []
+		else:
+			self.devices_manage(*args,action='get_devices')
 	
 	if args[0] == '/live/device/get/parameters/name':
 		self.devices_manage(*args,action='get_parameter_names')
@@ -179,7 +194,7 @@ def osc(self,*args):
 	if args[0] == '/live/view/get/selected_scene':
 		scenes.selected = args[1]
 		time.sleep(0.5)
-		self.speak(scenes.selected)
+		#speak(scenes.selected+1)
 		
 	if args[0] == '/live/device/get/parameter/value':
 		speak(round(args[4],3))

@@ -79,7 +79,7 @@ going_out = {
 
 data = {
 	'name' : "mWave Chocolate",
-	'ports':['USB-Midi',False],
+	'ports':['USB-Midi',False,'startswith'],
 	'going_out':going_out,
 	'control_init':[control_init],
 	'pre_midi':[pre_midi,True],

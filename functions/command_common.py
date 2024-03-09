@@ -24,7 +24,7 @@ def command_common(self,control,id,info,options):
 	## Debug
 	if state and id == 999:
 		os.system('cls')
-		pprint.pprint(main.devices)
+		pprint.pprint(plugins.params)
 
 	## All modifiers
 	if id not in range(921,924) and id in main.modifiers_data['list']:
@@ -179,8 +179,11 @@ def command_common(self,control,id,info,options):
 				control.keys_assoc.zone_manage(id-(700+inc),dir,action='zonetranspose')
 
 	## Routing functions
+	if state and id == 752:
+		control.daw_routing(daw='reaper',speak=True)
+
 	if state and id == 750:
-		control.daw_routing()
+		control.daw_routing(speak=True)
 
 	if state and id == 751:
 		if 'destination' not in options:
@@ -190,5 +193,6 @@ def command_common(self,control,id,info,options):
 		else:
 			control.keys_assoc.routing_destination = main.devices['ports'][options['destination']].port
 			control.keys_assoc.panic()
+			speak("Keys routed to "+main.devices['ports'][options['destination']].name)
 	
 	self.command_launch(control,id,info,options)

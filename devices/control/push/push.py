@@ -210,7 +210,7 @@ for _ in range(200,208):
 
 data = {
 	'name' : "Ableton Push 1",
-	'ports':['MIDIIN2 (Ableton Push)','MIDIOUT2 (Ableton Push)'],
+	'ports':['MIDIIN2 (Ableton Push)','MIDIOUT2 (Ableton Push)','startswith'],
 	'touch_tolerance':20,
 	'getting_in':getting_in,
 	'going_out':going_out,

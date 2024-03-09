@@ -14,9 +14,9 @@ class Ports:
 		self.ports_init = False
 		self.pre_midi = False
 		self.__dict__.update(data)
-		self.port = MidiSurfaces(self.ports,self.main				)
+		self.port = MidiSurfaces(self.ports,self.main,self.ports[2])
 		if self.port.inport:
-			Thread(target=self.midi_loop).start()
+			#Thread(target=self.midi_loop).start()
 			if self.ports_init:
 				self.ports_init[0](self)
 			self.act = True

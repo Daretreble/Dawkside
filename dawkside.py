@@ -22,7 +22,7 @@ from functions.device_loader import device_loader
 if __name__ == "__main__":
 
 	os.system('cls')
-	speak("Dawkside is loading", printout=True)
+	speak("Dawkside is loading using the following devices :\n\n", printout=True)
 
 	dawkside_count = 0
 	for process in psutil.process_iter(['pid', 'name']):
@@ -49,6 +49,6 @@ if __name__ == "__main__":
 	main.locked = [False, '']
 	
 	# Intro
-	output = f"Welcome to Dawkside.\nWaiting for daws.\n"
+	output = f"\nWelcome to Dawkside.\nWaiting for daws.\n"
 
 	speak(output, printout=True)

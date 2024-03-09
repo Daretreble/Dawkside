@@ -23,9 +23,14 @@ def device_loader(main):
 			data = device_module.data
 			data.update({'short_name': d})
 			port = data['ports'][0]
+			searching = data['ports'][2]
 			linked_ports = []
 			for _ in inports:
-				if _.startswith(port):
+				if searching == 'startswith':
+					linked_test = _.startswith(port)
+				if searching == 'contains':
+					linked_test = port in _
+				if linked_test:
 					inports.remove(_)
 					linked_ports.append(_)
 			#linked_ports = [item for item in inports if item.startswith(port)]
@@ -37,3 +42,4 @@ def device_loader(main):
 					main.devices[cat][d] = Keys(main,data)
 				elif cat == 'ports':
 					main.devices[cat][d] = Ports(main,data)
+				print(cat,':',main.devices[cat][d].name)

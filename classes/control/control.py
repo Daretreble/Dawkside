@@ -8,6 +8,7 @@ from classes.buttons.buttons import Buttons
 from classes.modes.modes import Modes
 from classes.midisurfaces import MidiSurfaces
 from functions.misc import keys_to_int
+from functions.speak import speak
 from .functions import *
 
 class Control:
@@ -47,7 +48,7 @@ class Control:
 			}
 		"""
 
-		self.port = MidiSurfaces(self.ports,self.main)
+		self.port = MidiSurfaces(self.ports,self.main,self.ports[2])
 		for _ in range(128):
 			if not self.toggle_type:
 				self.port.midiout(MidiMsg('note_off',note=_,channel=0,velocity=0))
@@ -89,12 +90,20 @@ class Control:
 			Thread(target=self.midi_loop).start()
 		Thread(target=delayed).start()
 
-	def daw_routing(self):
+	def daw_routing(self,**kwargs):
+
+		speak_out = True if 'speak' in kwargs else False
+		daw_tmp = self.daw
+		if 'daw' in kwargs:
+			self.daw = self.main.daws[kwargs['daw']]
+
 		for key,value in self.main.devices['keys'].items():
-			if self.main.devices['keys'][key].control_assoc.name == self.name:
+			if value.control_assoc and self.main.devices['keys'][key].control_assoc.name == self.name:
 				self.keys_assoc = self.main.devices['keys'][key]
-				self.main.devices['keys'][key].routing_destination = self.daw.routing
+				self.main.devices['keys'][key].routing_destination = daw_tmp.routing
 				self.main.devices['keys'][key].panic()
+		if speak_out:
+			speak("Keys routed to "+daw_tmp.name)
 
 Control.daw_prepare = daw_prepare
 Control.layout_prepare = layout_prepare

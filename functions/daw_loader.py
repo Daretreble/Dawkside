@@ -20,7 +20,7 @@ def daw_loader(main):
 					reaper_launch()
 
 				# Detects Live
-				if 'live' not in main.daws and p.name() == 'Ableton Live 12 Beta.exe':
+				if 'live' not in main.daws and p.name() == 'Ableton Live 12 Suite.exe':
 					live_launch()
 
 			time.sleep(3)

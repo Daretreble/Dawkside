@@ -138,7 +138,7 @@ def pre_midi(self,msg):
 	
 data = {
 	'name' : "Akai APC Mini",
-	'ports':['APC MINI','APC MINI'],
+	'ports':['APC MINI','APC MINI','startswith'],
 	'toggle_type':1,
 	'getting_in':getting_in,
 	'going_out':going_out,

@@ -40,7 +40,10 @@ def fre_action(self,info):
 
 			# Plugins faders
 			if outmode == 12:
-				fre_tmp = daw.fre['plugins']['faders']
+				try:
+					fre_tmp = daw.fre['plugins']['faders']
+				except KeyError:
+					print('fre_actions line 51')
 
 			if fre_tmp and pos in fre_tmp:
 				

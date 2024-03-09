@@ -37,6 +37,11 @@ def command_launch(self,control,id,info,options):
 	if state and id == 1090:
 		self.clips.delete(self.track.index[0],self.scenes.index[0])
 
+	## Reloads devices on selected track
+	if state and id == 1198:
+		self.client.send_message('/live/track/get/devices/name',(track.index[0]))
+		speak("Reloaded")
+	
 	## Reloads Ableton OSC
 	if state and id == 1199:
 		speak("Ableton OSC API is reloading.")

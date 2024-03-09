@@ -3,8 +3,8 @@ def pre_midi(self,msg):
 	pass
 
 data = {
-	'name' : "Focusrite USB",
-	'ports' : ['2- Focusrite USB MIDI','2- Focusrite USB MIDI'],
+	'name' : "Focusrite Midi",
+	'ports' : ['2- Focusrite USB MIDI','2- Focusrite USB MIDI','startswith'],
 	'settings':{
 		'control_assoc':'keylab_mk2',
 	},
