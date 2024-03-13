@@ -16,21 +16,25 @@ def devices_manage(self,*args,**kwargs):
 	plugins = self.plugins
 	
 	def page_change():
+
+		os.system('cls')
 		
 		for _ in self.datatmp['listens']['parameters']:
+			#print('stop',_)
 			self.client.send_message('/live/device/stop_listen/parameter/value',_)
 		self.datatmp['listens']['parameters'] = []
-		time.sleep(0.05)
+		#time.sleep(0.1)
 		page_tmp = (self.plugins.page[0]-1) * 8
 		for _ in range(page_tmp,page_tmp+8):
-			tuple_tmp = (self.track.index[0],self.plugins.index[0]-1,_)
-			self.datatmp['listens']['parameters'].append(tuple_tmp)
+			tuple_tmp = [self.track.index[0],self.plugins.index[0]-1,_]
+			#print('start',tuple_tmp)
 			self.client.send_message('/live/device/start_listen/parameter/value',tuple_tmp)
+			self.datatmp['listens']['parameters'].append(tuple_tmp)
 		
 		time.sleep(0.1)
 		plugins.user.manage()
 		plugins.user.refresh(action='full')
-		main.play_sound('ready')
+		speak('Ready')
 	
 	if action == 'page_change':
 		page_change()
@@ -60,6 +64,7 @@ def devices_manage(self,*args,**kwargs):
 						tmp_data = json.load(file)
 						plugins.user_params[plugins.name] = keys_to_int(tmp_data)
 
+			#print('device start',self.plugins.name)
 			self.client.send_message('/live/device/get/parameters/name',(self.track.index[0],plugins.index[0]-1))
 		else:
 			plugins.act = False
@@ -73,9 +78,11 @@ def devices_manage(self,*args,**kwargs):
 			plugins.params[count] = {'prm':count,'name':params,'val':False,'valstr':False,'defval':False,'min':False,'max':False}
 			count += 1
 		plugins.param_count = len(plugins.params)
+		#print('parameters',len(plugins.params))
 		self.client.send_message('/live/device/get/parameters/min',(self.track.index[0],plugins.index[0]-1))
 
 	if action == 'get_parameter_values':
+		
 		count = 1
 		for values in args[3:]:
 			plugins.params[count]['valstr'] = values
@@ -88,6 +95,7 @@ def devices_manage(self,*args,**kwargs):
 		for mins in args[3:]:
 			plugins.params[count]['min'] = mins
 			count += 1
+		#print('mins',len(args[3:]))
 		self.client.send_message('/live/device/get/parameters/max',(self.track.index[0],plugins.index[0]-1))
 
 	if action == 'get_parameter_maxs':
@@ -97,4 +105,5 @@ def devices_manage(self,*args,**kwargs):
 			plugins.params[count]['val'] = normalized_from_min_max(plugins.params[count]['valstr'],plugins.params[count]['min'],maxs)
 			count += 1	
 		
+		#print('maxs',len(args[3:]))
 		page_change()

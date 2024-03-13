@@ -2,7 +2,9 @@ from functions.speak import speak
 
 def param_set(self,dest,action):
 	""" Sets the selected parameter on destination. """
+
 	plugins = self.plugins
+	daw = plugins.daw
 	main = plugins.main
 	
 	if plugins.act:
@@ -49,7 +51,11 @@ def param_set(self,dest,action):
 				speak("Please select a parameter.")
 		if passed:
 		
-			plugins.daw.pVar = ['fxreload']
+			if daw.short_name == 'reaper':
+				daw.pVar = ['fxreload']
+			
+			if daw.short_name == 'live':
+				daw.client.send_message('/live/track/get/devices/name',(daw.track.index[0],0))
 			
 	else:
 	

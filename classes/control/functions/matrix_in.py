@@ -83,4 +83,8 @@ def matrix_in(self,*args,**kwargs):
 				if refers in self.getting_in:
 					trig(args[1],self.getting_in[refers])
 		elif 'direct' in kwargs:
-			trig(args[1],self.getting_in[id])
+			try:
+				trig(args[1],self.getting_in[id])
+			except KeyError:
+				# Error 1
+				print('Error','matrix_in',1)

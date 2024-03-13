@@ -49,8 +49,10 @@ def plugin_nav(self,action,*args):
 				elif self.index[0] + dir in range(1,self.nfxs+1):
 					self.index[0]+=dir
 					speak(f"{self.index[0]} {self.plugins_list[self.index[0]-1]}")
+					
 					if daw.short_name == 'reaper':
 						main.switchtime = time.time()
+					
 					if daw.short_name == 'live':
 						daw.client.send_message('/live/track/get/devices/name',(daw.track.index[0],0))
 	else:
