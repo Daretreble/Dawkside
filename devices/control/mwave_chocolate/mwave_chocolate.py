@@ -1,4 +1,4 @@
-# Arturia KeyLab Mk2
+# mWave Chocolate foot controller
 
 from mido import Message as MidiMsg
 from functions.speak import speak

@@ -157,5 +157,4 @@ def get_data(self,*args):
 				plugins.name = ''
 			plugins.user.refresh(action='full')	
 	
-	speak('Ready')
-	#main.play_sound('ready')
+	main.play_sound('ready')

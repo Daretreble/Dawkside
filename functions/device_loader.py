@@ -42,4 +42,3 @@ def device_loader(main):
 					main.devices[cat][d] = Keys(main,data)
 				elif cat == 'ports':
 					main.devices[cat][d] = Ports(main,data)
-				print(cat,':',main.devices[cat][d].name)

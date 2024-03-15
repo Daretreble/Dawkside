@@ -2,6 +2,8 @@ import sys
 import os
 import time
 from functions.speak import speak
+import pygame
+import threading
 
 class Main:
 	""" Global """
@@ -49,15 +51,15 @@ class Main:
 			13:{'name':"Mixer (to come)",'type':'tracks','desc':"The mixer output mode enables you to utilize the faders and encoders as a multi-track control surface."},
 			14:{'name':"Midi routing (to come)",'type':'routing','desc':"The MIDI Routing mode is a powerful tool that empowers you to route various MIDI signals to other devices and DAWs."},
 		}
-	
-	def safety_check(self,guard):
+		pygame.mixer.init()  # Initialize Pygame mixer
+
+	def safety_check(self, guard):
 		if self.safety_guards[guard][0]:
 			speak(self.safety_guards[guard][1])
 			return False
 		else:
 			return True
 			
-	
 	def game_over(self):
 		self.running_threads_on = False
 		for ml in self.midi_ports:
@@ -69,7 +71,7 @@ class Main:
 		speak("Exiting Dawkside. See.")
 		time.sleep(1)
 	
-	def modif(self,action,*args):
+	def modif(self, action, *args):
 	
 		data = self.modifiers_data
 		list = data['list']
@@ -92,8 +94,10 @@ class Main:
 			else:
 				if id in status[1]:
 					status[1].remove(id)
-			
-	def play_sound(self,sound):
-		pass
-		#sound_file_path = 'media////sounds////'+sound+'.mp3'
-		#playsound(sound_file_path)
+		
+	def play_sound(self, sound):
+		def play(sound):
+			sound_path = os.path.join('media','sounds',sound+".mp3")
+			pygame.mixer.Sound(sound_path).play()
+		
+		threading.Thread(target=play, args=(sound,)).start()

@@ -87,7 +87,7 @@ def fre_process(self,info):
 				fstmp[0] = True
 				fstmp[2] = fstmp[1]
 				if tolerated:
-					speak('click')
+					main.play_sound('tick')
 					#main.play_sound('tick')
 			else:
 				if time.time() - self.fader_state[pos][4] > 0.2:

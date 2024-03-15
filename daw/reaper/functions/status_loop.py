@@ -104,7 +104,7 @@ def status_loop(self,*args):
 				self.pVar = []
 				plugins.user.manage()
 				plugins.user.refresh(action='full')
-				speak('Ready')
+				main.play_sound('ready')
 				#self.main.play_sound('ready')
 
 			if 'trackreload' in self.pVar and time.time()-self.switchtime > 0.4:
@@ -132,7 +132,7 @@ def status_loop(self,*args):
 					self.track.refresh(action='full')
 					plugins.user.refresh(action='full')
 					self.switch_on = False
-					speak('Ready')
+					main.play_sound('ready')
 					#self.main.play_sound('ready')
 				Thread(target=delayed_load).start()
 				self.client.send_message('/device/fxparam/count',256)

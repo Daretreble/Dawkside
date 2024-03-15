@@ -23,23 +23,26 @@ class Keys:
 			if self.keys_init:
 				self.keys_init[0](self)
 			self.act = True
-		self.notes_on = []
-		self.zones_config = [
-			[True,0,127,0,0,True],
-		]
-		self.zone_presets = [
-			[
-				[[True,0,127,0,0,True]],
-				"Zone resetted to full range"
-			],
-			[
-				[
-					[True,0,54,0,0,True],
-					[True,55,127,0,1,True],
-				],
-				"Orchestral split"
+			self.notes_on = []
+			self.zones_config = [
+				[True,0,127,0,0,True],
 			]
-		]
+			self.zone_presets = [
+				[
+					[[True,0,127,0,0,True]],
+					"Zone resetted to full range"
+				],
+				[
+					[
+						[True,0,54,0,0,True],
+						[True,55,127,0,1,True],
+					],
+					"Orchestral split"
+				]
+			]
+			print("Keys",self.name)
+		else:
+			print("Keys (Unavailable)",self.name)
 
 	def panic(self):
 

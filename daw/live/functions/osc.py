@@ -75,8 +75,7 @@ def osc(self,*args):
 
 	if args[0] == '/live/device/get/parameter/value':
 		param_tmp = self.plugins.params[args[3]+1]
-		value_out = normalized_from_min_max(args[4],param_tmp['min'],param_tmp['max']) 
-		print(value_out)
+		value_out = normalized_from_min_max(args[4],param_tmp['min'],param_tmp['max'])
 		param_number = args[3]+1
 		ids = self.fre['plugins']['ids']
 		if param_number in plugins.params:
@@ -116,8 +115,8 @@ def osc(self,*args):
 	if args[0] == '/live/device/get/parameter/value_string':
 		#print(args)
 		#print(find_position(args[3]))
-		param_tmp = self.plugins.params[args[3]+1]
-		#print(param_tmp['name'],args[4])
+		#param_tmp = self.plugins.params[args[3]+1]
+		plugins.params[args[3]+1]['valstr'] = args[4]
 
 	if args[0] == '/live/device/get/parameters/min':
 		self.devices_manage(*args,action='get_parameter_mins')

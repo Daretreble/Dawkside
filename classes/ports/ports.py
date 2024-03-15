@@ -20,5 +20,8 @@ class Ports:
 			if self.ports_init:
 				self.ports_init[0](self)
 			self.act = True
+			print("Port",self.name)
+		else:
+			print("Port (Unavailable)",self.name)
 			
 Ports.midi_loop = midi_loop

@@ -49,46 +49,50 @@ class Control:
 		"""
 
 		self.port = MidiSurfaces(self.ports,self.main,self.ports[2])
-		for _ in range(128):
-			if not self.toggle_type:
-				self.port.midiout(MidiMsg('note_off',note=_,channel=0,velocity=0))
+		if self.port.inport:
+			for _ in range(128):
+				if not self.toggle_type:
+					self.port.midiout(MidiMsg('note_off',note=_,channel=0,velocity=0))
+				else:
+					if self.toggle_type == 1:
+						self.port.midiout(MidiMsg('note_on',note=_,channel=0,velocity=0))
+				self.port.midiout(MidiMsg('control_change',control=_,channel=0,value=0))
+			
+			# Load settings
+			self.settings_path = os.path.join('devices','control',self.short_name,'settings.json')
+			if os.path.isfile(self.settings_path):
+				self.settings_load()
 			else:
-				if self.toggle_type == 1:
-					self.port.midiout(MidiMsg('note_on',note=_,channel=0,velocity=0))
-			self.port.midiout(MidiMsg('control_change',control=_,channel=0,value=0))
-		
-		# Load settings
-		self.settings_path = os.path.join('devices','control',self.short_name,'settings.json')
-		if os.path.isfile(self.settings_path):
-			self.settings_load()
-		else:
-			self.default_settings = {
-				'selected_daw':'reaper',
-				'layout':'default',
-			}
-			self.settings_save(self.default_settings)
-			self.settings = self.default_settings
-		self.control_init[0](self)
-		if '--use-default-layouts' in main.queries:
-			self.layouts = self.default_layout
-		else:
-			layout_path = os.path.join('devices','control',self.short_name,'layouts',self.settings['layout']+'.json')
-			if os.path.isfile(layout_path):
-				with open(layout_path, 'r') as file:
-					self.layouts = keys_to_int(json.load(file))
-			else:
+				self.default_settings = {
+					'selected_daw':'reaper',
+					'layout':'default',
+				}
+				self.settings_save(self.default_settings)
+				self.settings = self.default_settings
+			self.control_init[0](self)
+			if '--use-default-layouts' in main.queries:
 				self.layouts = self.default_layout
-				self.settings['layout'] == 'default'
-				self.layout_save()
-		def delayed():
-			if len(self.main.daws) == 0:
-				time.sleep(1)
-				delayed()
 			else:
-				time.sleep(1)
-				self.daw_prepare()
-			Thread(target=self.midi_loop).start()
-		Thread(target=delayed).start()
+				layout_path = os.path.join('devices','control',self.short_name,'layouts',self.settings['layout']+'.json')
+				if os.path.isfile(layout_path):
+					with open(layout_path, 'r') as file:
+						self.layouts = keys_to_int(json.load(file))
+				else:
+					self.layouts = self.default_layout
+					self.settings['layout'] == 'default'
+					self.layout_save()
+			def delayed():
+				if len(self.main.daws) == 0:
+					time.sleep(1)
+					delayed()
+				else:
+					time.sleep(1)
+					self.daw_prepare()
+				Thread(target=self.midi_loop).start()
+			Thread(target=delayed).start()
+			print("Control",self.name)
+		else:
+			print("Control (unavailable)",self.name)
 
 	def daw_routing(self,**kwargs):
 

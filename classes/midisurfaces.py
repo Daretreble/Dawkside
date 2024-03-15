@@ -1,5 +1,8 @@
+import os
 import mido
 import mido.backends.rtmidi
+from rtmidi import _rtmidi as _rtmidi
+
 
 class MidiSurfaces:
 	""" Manage midi control surfaces """
@@ -23,8 +26,8 @@ class MidiSurfaces:
 						self.inport = mido.open_input(pl)
 						main.midi_ports.append(self.inport)
 						self.inport.info = self.ports[0]
-					except _rtmidi.SystemError as a:
-						print(e)
+					except _rtmidi.SystemError as e:
+						self.inport = False
 		else:
 			self.inport = False
 		
@@ -32,9 +35,12 @@ class MidiSurfaces:
 		if self.ports[1]:
 			for pl in mido.get_output_names():
 				if pl.startswith(self.ports[1]):
-					self.outport = mido.open_output(pl)
-					main.midi_ports.append(self.outport)
-					self.outport.info = self.ports[0]
+					try:
+						self.outport = mido.open_output(pl)
+						main.midi_ports.append(self.outport)
+						self.outport.info = self.ports[0]
+					except _rtmidi.SystemError as e:
+						self.outport = False
 		else:
 			self.outport = False
 			
