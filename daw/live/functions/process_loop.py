@@ -30,10 +30,16 @@ def process_loop(self,*args):
 				'mute',
 				'panning',
 				'volume',
+				'send',
 			]
 			for _ in to_get:
-				self.client.send_message('/live/track/stop_listen/'+_,(self.track.index[1]))
-				self.client.send_message('/live/track/start_listen/'+_,(self.track.index[0]))
+				if _ == 'send':
+					self.fre['track']['send'] = {}
+					for send_id in range(6):
+						self.client.send_message('/live/track/get/'+_,(self.track.index[0],send_id))	
+				else:
+					self.client.send_message('/live/track/stop_listen/'+_,(self.track.index[1]))
+					self.client.send_message('/live/track/start_listen/'+_,(self.track.index[0]))
 			self.client.send_message('/live/song/get/num_tracks',())
 			main.switchtime = time.time()
 			self.datatmp['osc_tracking']['track_change'][0] = False

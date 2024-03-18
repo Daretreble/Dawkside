@@ -101,10 +101,8 @@ def fre_action(self,info):
 					if state:
 						speak(fader_name)
 					else:
-						#if daw.short_name in ['reaper']:
-						speak(fader_value)
-						#if daw.short_name == 'live':
-							#daw.client.send_message('/live/device/get/parameter/value',(daw.track.index[0],daw.plugins.index[0],fre_tmp[pos]['prm']-1))
+						if fader_value != '':
+							speak(fader_value)
 			else:
 				if state:
 					speak("Empty")

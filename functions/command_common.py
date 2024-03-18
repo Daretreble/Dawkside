@@ -24,7 +24,7 @@ def command_common(self,control,id,info,options):
 	## Debug
 	if state and id == 999:
 		os.system('cls')
-		#pprint.pprint(plugins.params)
+		pprint.pprint(self.fre)
 
 	## All modifiers
 	if id not in range(921,924) and id in main.modifiers_data['list']:

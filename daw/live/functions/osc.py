@@ -1,5 +1,6 @@
 import time
 import os
+import pprint
 from functions.misc import invert_grid_position,find_position,normalized_from_min_max
 from functions.speak import speak
 
@@ -10,6 +11,31 @@ def osc(self,*args):
 	tracks = self.tracks
 	plugins = self.plugins
 	scenes = self.scenes
+
+	if args[0] == '/live/track/get/send':
+		value_out = round(args[3],4)
+		self.fre['track']['send'][args[2]] = {
+			'name': 'Send '+str(args[2]),
+			'pitch': [value_out,False],
+			'valstr':str(round(value_out)*100)
+			}
+		for m in self.online['control']:
+			m.fre_feedback(11,args[2],value_out)
+	
+	if args[0] == '/live/track/get/name':
+		self.track.name = args[2]
+
+	if args[0] == '/live/track/get/volume':
+		value_out = round(args[2],4)
+		self.fre['track']['track'][7]['pitch'] = [value_out,False]
+		for m in self.online['control']:
+			m.fre_feedback(11,7,value_out)
+
+	if args[0] == '/live/track/get/panning':
+		value_out = round(args[2]+0.5,4)
+		self.fre['track']['track'][6]['pitch'] = [value_out,False]
+		for m in self.online['control']:
+			m.fre_feedback(11,6,value_out)
 
 	# Transport osc
 	if args[0] in self.transport.osc_triggers:
@@ -74,7 +100,11 @@ def osc(self,*args):
 		self.devices_manage(*args,action='get_parameter_names')
 
 	if args[0] == '/live/device/get/parameter/value':
-		param_tmp = self.plugins.params[args[3]+1]
+		try:
+			param_tmp = self.plugins.params[args[3]+1]
+		except KeyError:
+			os.system('cls')
+			pprint.pprint(self.plugins.params)
 		value_out = normalized_from_min_max(args[4],param_tmp['min'],param_tmp['max'])
 		param_number = args[3]+1
 		ids = self.fre['plugins']['ids']

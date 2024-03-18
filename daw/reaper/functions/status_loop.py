@@ -22,7 +22,7 @@ def status_loop(self,*args):
 	
 	if self.reapy_mode:
 		
-		while True and self.main.running_threads_on:
+		while True:
 
 			if 'stop' in self.pVar:
 				break
@@ -41,9 +41,8 @@ def status_loop(self,*args):
 				time.sleep(5)
 				track = self.reapy.Project().selected_tracks[0]
 			except ConnectionResetError:
-				os.system('cls')
-				speak("Exiting Reaper.",printout=True)
-				sys.exit(0)
+				self.quit()
+				break
 			except IndexError:
 				track = self.reapy.Project().master_track
 			if track:
@@ -98,7 +97,7 @@ def status_loop(self,*args):
 
 	else:
 
-		while True and self.main.running_threads_on:
+		while True and 'quit' not in self.pVar:
 
 			if 'page_change' in self.pVar and time.time()-self.switchtime > 0.5:
 				self.pVar = []

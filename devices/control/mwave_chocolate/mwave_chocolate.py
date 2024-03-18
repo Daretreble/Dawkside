@@ -50,7 +50,7 @@ def control_init(self):
 	
 def pre_midi(self,msg):
 	
-	pass
+	print(msg)
 
 	"""if msg.control == 3:
 		self.disp_toggle = True
@@ -79,7 +79,7 @@ going_out = {
 
 data = {
 	'name' : "mWave Chocolate",
-	'ports':['USB-Midi',False,'startswith'],
+	'ports':['Chocolate mWave',False,'startswith'],
 	'going_out':going_out,
 	'control_init':[control_init],
 	'pre_midi':[pre_midi,True],

@@ -75,6 +75,13 @@ class Live:
 			'scene_offset':0,
 		}
 
+	def fake_valstr(self,pos,value):
+		if pos in range(6) or pos == 7:
+			return str(round(value*100)) + "percent"
+		elif pos == 6:
+			pan_tmp = round(value*100)
+			return str(pan_tmp)
+
 # Functions
 Live.command_launch = command_launch
 Live.devices_manage = devices_manage

@@ -31,6 +31,8 @@ def fre_process(self,info):
 					# Send messages
 					if sn == 'reaper':
 						osc_msg = f"/track/send/{pos+1}/volume"
+					if sn == 'live':
+						osc_msg = f"/live/track/set/send"
 				
 				if sr_sel == 'recv':
 
@@ -46,12 +48,16 @@ def fre_process(self,info):
 				# Pan message
 				if sn == 'reaper':
 					osc_msg = "/track/pan"
+				if sn == 'live':
+					osc_msg = "/live/track/set/panning"
 			
 			if pos == 7:
 
 				# Volume message
 				if sn == 'reaper':
 					osc_msg = "/track/volume"
+				if sn == 'live':
+					osc_msg = "/live/track/set/volume"
 
 			fre_tmp = tmp['track'][pos]
 			value_string = fre_tmp['valstr']
@@ -105,9 +111,15 @@ def fre_process(self,info):
 					m.fre_feedback(11,pos,new_value)
 		
 		if sn == 'live':
-			pass
-			"""for m in daw.online['control']:
-				m.fre_feedback(self.daw_vars['outmode'],pos,new_value)"""
+			if tolerated and self.daw_vars['outmode'] == 11:
+				if  pos < 6:
+					self.daw.fre['track']['send'][pos]['valstr'] = daw.fake_valstr(pos,new_value)
+					for m in daw.online['control']:
+						m.fre_feedback(self.daw_vars['outmode'],pos,new_value)
+				elif pos == 6:
+					self.daw.fre['track']['track'][pos]['valstr'] = daw.fake_valstr(pos,new_value)
+				elif pos == 7:
+					self.daw.fre['track']['track'][pos]['valstr'] = daw.fake_valstr(pos,new_value)
 		
 		if new_value:
 			fre_tmp['pitch'][0] = new_value
@@ -127,11 +139,19 @@ def fre_process(self,info):
 				if sn == 'reaper':
 					value_out = fre_tmp['pitch'][0]
 				if sn == 'live':
-					min = fre_tmp['min']
-					max = fre_tmp['max']
-					value_tmp = fre_tmp['pitch'][0]
-					converted_value = value_from_normalized(value_tmp,min,max)
-					value_out = (daw.track.index[0],daw.plugins.index[0]-1,tmp[pos]['prm']-1,converted_value)
+					if self.daw_vars['outmode'] == 11:
+						if pos < 6:
+							value_out = (daw.track.index[0],pos,fre_tmp['pitch'][0])
+						elif pos == 6:
+							value_out = (daw.track.index[0],fre_tmp['pitch'][0]-0.5)
+						elif pos == 7:
+							value_out = (daw.track.index[0],fre_tmp['pitch'][0])
+					if self.daw_vars['outmode'] == 12:
+						min = fre_tmp['min']
+						max = fre_tmp['max']
+						value_tmp = fre_tmp['pitch'][0]
+						converted_value = value_from_normalized(value_tmp,min,max)
+						value_out = (daw.track.index[0],daw.plugins.index[0]-1,tmp[pos]['prm']-1,converted_value)
 
 				if tolerated:
 					daw.client.send_message(osc_msg,value_out)

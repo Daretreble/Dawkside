@@ -1,9 +1,11 @@
+import time
 from .classes import *
 from classes.track.track import Track
 from classes.tracks.tracks import Tracks
 from classes.plugins.plugins import Plugins
 from classes.transport.transport import Transport
 from .functions import *
+from functions.speak import speak
 
 class Reaper:
 	""" Control Reaper calls. """
@@ -56,6 +58,17 @@ class Reaper:
 			'scene_offset':0,
 			'send_recv_sel':'send',
 		}
+
+	def quit(self):
+		
+		self.pVar = ['quit']
+		self.routing.inport.close()
+		self.routing.outport.close()
+		self.routing = False
+		self.server.shutdown()
+		time.sleep(3)
+		del(self.main.daws['reaper'])
+		speak("Reaper has left the building",printout=True)
 
 # Functions
 Reaper.command_launch = command_launch

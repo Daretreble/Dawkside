@@ -13,7 +13,7 @@ def get_data(self):
 		self.client.send_message('/live/song/start_listen/'+_,())
 	self.client.send_message('/live/view/start_listen/selected_scene',())
 	self.client.send_message('/live/view/start_listen/selected_track',())
-	self.client.send_message('/live/view/start_listen/selected_device',())
+	#self.client.send_message('/live/view/start_listen/selected_device',())
 	
 	"""
 	for _ in range(8):

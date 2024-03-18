@@ -22,6 +22,7 @@ def devices_manage(self,*args,**kwargs):
 		page_tmp = (self.plugins.page[0]-1) * 8
 		for _ in range(page_tmp,page_tmp+8):
 			tuple_tmp = [self.track.index[0],self.plugins.index[0]-1,_]
+			self.client.send_message('/live/device/get/parameter/value	',tuple_tmp)
 			self.client.send_message('/live/device/start_listen/parameter/value',tuple_tmp)
 			self.datatmp['listens']['parameters'].append(tuple_tmp)
 		
@@ -85,15 +86,17 @@ def devices_manage(self,*args,**kwargs):
 	if action == 'get_parameter_mins':
 		count = 1
 		for mins in args[3:]:
-			plugins.params[count]['min'] = mins
+			if count in plugins.params:
+				plugins.params[count]['min'] = mins
 			count += 1
 		self.client.send_message('/live/device/get/parameters/max',(self.track.index[0],plugins.index[0]-1))
 
 	if action == 'get_parameter_maxs':
 		count = 1
 		for maxs in args[3:]:
-			plugins.params[count]['max'] = maxs
-			plugins.params[count]['val'] = normalized_from_min_max(plugins.params[count]['valstr'],plugins.params[count]['min'],maxs)
+			if count in plugins.params:
+				plugins.params[count]['max'] = maxs
+				plugins.params[count]['val'] = normalized_from_min_max(plugins.params[count]['valstr'],plugins.params[count]['min'],maxs)
 			count += 1	
 		
 		page_change()
