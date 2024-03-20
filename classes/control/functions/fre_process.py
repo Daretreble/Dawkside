@@ -8,9 +8,17 @@ def fre_process(self,info):
 
 	daw = self.daw
 	main = daw.main
+	modif = main.modif
 	sn = daw.short_name
 	value = info[2]
 	pos = (info[0][0]-200)+(8*(self.daw_vars['rotary_group']-1))
+	if pos != self.last_touched[0] or not self.last_touched[0] or time.time() - self.last_touched[1] > 5:
+		new_fader_action = True
+		self.last_touched[0] = pos
+		self.last_touched[1] = time.time()
+	else:
+		new_fader_action = False
+
 	opt = info[0][1]
 	model = opt['model']
 	pickup = True if 'pickup' in opt else False
@@ -76,8 +84,11 @@ def fre_process(self,info):
 			fre_tmp = tmp[pos]
 			value_string = daw.plugins.params[tmp[pos]['prm']]['valstr']
 	
+	if new_fader_action or modif('test',[911]):
+		speak(fre_tmp['name'],repeat=False)
+	
 	tolerated = True
-	if pickup:
+	if pickup and not modif('test',[911]):
 		fstmp = self.fader_state[pos]
 		fre_value = pitch_convert('v2c',model_convert(model,value,value))
 		fstmp[1] = fre_value
@@ -94,14 +105,13 @@ def fre_process(self,info):
 				fstmp[2] = fstmp[1]
 				if tolerated:
 					main.play_sound('tick')
-					#main.play_sound('tick')
 			else:
 				if time.time() - self.fader_state[pos][4] > 0.2:
 					if tolerated:
-						speak('up' if fstmp[1] < fstmp[2] else 'down')
+						main.play_sound('high' if fstmp[1] < fstmp[2] else 'low')
 					self.fader_state[pos][4] = time.time()
 		
-	if fre_tmp and (not pickup or (pickup and fstmp[0])):
+	if fre_tmp and not modif('test',[911]) and (not pickup or (pickup and fstmp[0])):
 	
 		new_value = model_convert(model,value,fre_tmp['pitch'][0])
 		
@@ -128,10 +138,10 @@ def fre_process(self,info):
 				
 				fre_tmp['pitch'][1] = fre_tmp['pitch'][0]
 
-				if time.time() - self.fader_state[pos][4] > 0.3:
+				if time.time() - self.fader_state[pos][4] > 0.5:
 					if tolerated:
-						pass
 						# Add to have the value string said while moving.
+						pass
 						#speak(value_string)
 					self.fader_state[pos][4] = time.time()
 				

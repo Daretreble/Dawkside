@@ -35,6 +35,7 @@ class Control:
 		self.getting_in_exclude = [240, 251, 252, 253] + list(range(200, 232))
 		self.layout_active = 0
 		self.fader_state = [[False, 0, 0, 0, time.time()] for _ in range(32)]
+		self.last_touched = [False,time.time()]
 		self.faders = {
 			'track':{},
 			'plugins':{},

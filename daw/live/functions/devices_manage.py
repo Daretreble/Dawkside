@@ -1,4 +1,5 @@
 import os
+import pprint
 import json
 import time
 import re
@@ -15,20 +16,23 @@ def devices_manage(self,*args,**kwargs):
 	
 	def page_change():
 
+		self.datatmp['osc_tracking']['page_load'][0] = True
+
 		for _ in self.datatmp['listens']['parameters']:
 			self.client.send_message('/live/device/stop_listen/parameter/value',_)
 		self.datatmp['listens']['parameters'] = []
-		#time.sleep(0.1)
+		time.sleep(0.01)
 		page_tmp = (self.plugins.page[0]-1) * 8
 		for _ in range(page_tmp,page_tmp+8):
 			tuple_tmp = [self.track.index[0],self.plugins.index[0]-1,_]
-			self.client.send_message('/live/device/get/parameter/value	',tuple_tmp)
+			#self.client.send_message('/live/device/get/parameter/value',tuple_tmp)
 			self.client.send_message('/live/device/start_listen/parameter/value',tuple_tmp)
 			self.datatmp['listens']['parameters'].append(tuple_tmp)
 		
 		time.sleep(0.1)
 		plugins.user.manage()
 		plugins.user.refresh(action='full')
+		self.datatmp['osc_tracking']['page_load'][0] = False
 		main.play_sound('ready')
 	
 	if action == 'page_change':

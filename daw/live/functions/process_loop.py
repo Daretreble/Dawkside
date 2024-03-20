@@ -14,7 +14,7 @@ def process_loop(self,*args):
 	self.loop_switchtime = time.time()
 	reset = 0
 	
-	while True and self.main.running_threads_on:
+	while True:
 
 		if self.datatmp['osc_tracking']['page_change'][0] and time.time() - self.datatmp['osc_tracking']['page_change'][1] > self.switch_delay:
 			self.datatmp['osc_tracking']['page_change'][0] = False

@@ -100,21 +100,17 @@ def osc(self,*args):
 		self.devices_manage(*args,action='get_parameter_names')
 
 	if args[0] == '/live/device/get/parameter/value':
-		try:
-			param_tmp = self.plugins.params[args[3]+1]
-		except KeyError:
-			os.system('cls')
-			pprint.pprint(self.plugins.params)
+		param_tmp = self.plugins.params[args[3]+1]
 		value_out = normalized_from_min_max(args[4],param_tmp['min'],param_tmp['max'])
 		param_number = args[3]+1
 		ids = self.fre['plugins']['ids']
 		if param_number in plugins.params:
 			plugins.params[param_number]['val'] = value_out
-			if param_number in ids:
+			if param_number in ids and not self.datatmp['osc_tracking']['page_load'][0]:
 				for m in self.online['control']:
 					for pos in ids[param_number]:
 						m.fre_feedback(12,pos,value_out)
-			if param_number in self.fre['plugins']['btns']:
+			if param_number in self.fre['plugins']['btns'] and not self.datatmp['osc_tracking']['page_load'][0]:
 				btns_tmp = self.fre['plugins']['btns'][param_number]
 				
 				for key,value in btns_tmp.items():

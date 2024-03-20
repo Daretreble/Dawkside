@@ -14,6 +14,7 @@ def refresh(self,*args,**kwargs):
 			
 	# Faders
 	for m in controls:
+		m.last_touched[0] = False
 		self.rotarygroup_sel(m,action='refresh',speak=False)
 			
 	# Plugin user page buttons

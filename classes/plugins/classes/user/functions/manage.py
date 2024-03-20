@@ -54,7 +54,7 @@ def manage(self):
 						daw.fre['plugins']['faders'][_] = {
 							'name':name,
 							'prm':(_+1)+base,
-							'pitch':[round(value,4),round(value,4)],
+							'pitch':[round(value,4) if value else 0.0,round(value,4) if value else 0.0],
 							'min':min,
 							'max':max,
 						}

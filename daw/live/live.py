@@ -15,7 +15,7 @@ class Live:
 		self.short_name = 'live'
 		self.developer = ["Ableton"]
 		self.switch_on = True
-		self.switch_delay = 0.3
+		self.switch_delay = 0.4
 		self.fre = {
 			'track':False,
 			'tracks':False,
@@ -59,6 +59,7 @@ class Live:
 			'osc_tracking':{
 				'track_change':[True,time.time()],
 				'page_change':[False,time.time()],
+				'page_load':[False,time.time()],
 			},
 			'listens':{
 				'parameters':[],
