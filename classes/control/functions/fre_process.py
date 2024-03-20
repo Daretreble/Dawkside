@@ -85,7 +85,10 @@ def fre_process(self,info):
 			value_string = daw.plugins.params[tmp[pos]['prm']]['valstr']
 	
 	if new_fader_action or modif('test',[911]):
-		speak(fre_tmp['name'],repeat=False)
+		if fre_tmp:
+			speak(fre_tmp['name'],repeat=False)
+		else:
+			speak("Empty")
 	
 	tolerated = True
 	if pickup and not modif('test',[911]):

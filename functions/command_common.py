@@ -24,7 +24,7 @@ def command_common(self,control,id,info,options):
 	## Debug
 	if state and id == 999:
 		os.system('cls')
-		pprint.pprint(self.fre)
+		print(self.tracks.num)
 
 	## All modifiers
 	if id not in range(921,924) and id in main.modifiers_data['list']:
@@ -44,7 +44,7 @@ def command_common(self,control,id,info,options):
 		output_type = options['type']
 		
 		if output_type == 'param_nav':
-			plugins.param_nav(1 if rotary_info[0] else -1,action='nav')
+			plugins.param_nav((1*rotary_info[1]) if rotary_info[0] else (-1*rotary_info[1]),action='nav')
 		if output_type == 'scale_nav':
 			control.modes.scales_nav(1 if rotary_info[0] else -1,action='nav')
 	

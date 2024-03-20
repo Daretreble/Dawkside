@@ -80,7 +80,7 @@ def manage(self):
 					self.page_clear(reload=False)
 				
 				else:
-				
+					reapy_chcked_param_id = []
 					if plugins.page[0] in plugins.user_params[plugins.name]:
 						plugins.page[1] = plugins.user_params[plugins.name][plugins.page[0]]['page_name']
 					else:
@@ -95,6 +95,15 @@ def manage(self):
 						if 'pressed' in value:
 							for seq in value['pressed']:
 								if seq['event_type'] == 'plugin_param':
+									reapy_chcked_param_id.append(seq['param_id'])
+									param_btn = daw.track.reapy_track.fxs[plugins.index[0]-1].params[seq['param_id']-1]
+									plugins.params[seq['param_id']].update({
+										'name':param_btn.name,
+										'val':param_btn,
+										'valstr':param_btn.formatted,
+									})
+									
+									
 									to_add = [float(seq['value']),False]
 									if seq['param_id'] not in btns_tmp:
 										btns_tmp[seq['param_id']] = {key:to_add}
@@ -127,12 +136,13 @@ def manage(self):
 						if _ <= plugins.param_count:
 							if daw.short_name == 'reaper':
 								param = daw.track.reapy_track.fxs[plugins.index[0]-1].params[_-1]
-								plugins.params[_].update({
-									'name':param.name,
-									'prm':_,
-									'val':round(param,4),
-									'valstr':param.formatted,
-								})
+								if _ not in reapy_chcked_param_id:
+									plugins.params[_].update({
+										'name':param.name,
+										'prm':_,
+										'val':round(param,4),
+										'valstr':param.formatted,
+									})
 					
 					for key,value in data.items():
 						if daw.short_name == 'reaper':

@@ -1,5 +1,4 @@
 import os
-import pprint
 import json
 import time
 import re
@@ -17,18 +16,40 @@ def devices_manage(self,*args,**kwargs):
 	def page_change():
 
 		self.datatmp['osc_tracking']['page_load'][0] = True
-
+		
 		for _ in self.datatmp['listens']['parameters']:
 			self.client.send_message('/live/device/stop_listen/parameter/value',_)
 		self.datatmp['listens']['parameters'] = []
+
+		params_to_activate = []
+		if plugins.page_type == 0:
+			if plugins.page[0] in plugins.user_params[plugins.name]:
+				pgtmp = plugins.user_params[plugins.name][plugins.page[0]]
+				if plugins.page[0] in plugins.user_params[plugins.name]:
+					data = pgtmp['data']
+					for key,value in data.items():
+						params_to_activate.append(value['prm']-1)
+		
+		if plugins.page_type == 1:
+			base = (plugins.page[0]-1)*8
+			for _ in range(8):
+				if (_+1)+base in plugins.params:
+					params_to_activate.append(_+base)
+
 		time.sleep(0.01)
+		for _ in params_to_activate:
+			tuple_tmp = [self.track.index[0],self.plugins.index[0]-1,_]
+			self.client.send_message('/live/device/start_listen/parameter/value',tuple_tmp)
+			self.datatmp['listens']['parameters'].append(tuple_tmp)
+
+		"""
 		page_tmp = (self.plugins.page[0]-1) * 8
 		for _ in range(page_tmp,page_tmp+8):
 			tuple_tmp = [self.track.index[0],self.plugins.index[0]-1,_]
 			#self.client.send_message('/live/device/get/parameter/value',tuple_tmp)
 			self.client.send_message('/live/device/start_listen/parameter/value',tuple_tmp)
 			self.datatmp['listens']['parameters'].append(tuple_tmp)
-		
+		"""
 		time.sleep(0.1)
 		plugins.user.manage()
 		plugins.user.refresh(action='full')

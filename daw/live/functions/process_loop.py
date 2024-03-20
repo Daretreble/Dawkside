@@ -41,6 +41,7 @@ def process_loop(self,*args):
 					self.client.send_message('/live/track/stop_listen/'+_,(self.track.index[1]))
 					self.client.send_message('/live/track/start_listen/'+_,(self.track.index[0]))
 			self.client.send_message('/live/song/get/num_tracks',())
+			self.client.send_message('/live/song/get/num_scenes',())
 			main.switchtime = time.time()
 			self.datatmp['osc_tracking']['track_change'][0] = False
 			self.pVar = []
@@ -52,7 +53,7 @@ def process_loop(self,*args):
 			Thread(target=track_load).start()
 		
 		## Timed actions
-		if time.time()-self.loop_switchtime > 3:
+		if not self.datatmp['osc_tracking']['page_load'][0] and time.time()-self.loop_switchtime > 3:
 			self.pVar = ['devices_check']
 			self.client.send_message('/live/track/get/devices/name',(track.index[0]))
 			self.loop_switchtime = time.time()

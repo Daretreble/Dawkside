@@ -12,7 +12,12 @@ def osc(self,*args):
 	plugins = self.plugins
 	scenes = self.scenes
 
+	if 'error' in args[0]:
+		pass
+		#print(args)
+	
 	if args[0] == '/live/track/get/send':
+		#print(args)
 		value_out = round(args[3],4)
 		self.fre['track']['send'][args[2]] = {
 			'name': 'Send '+str(args[2]),
@@ -67,7 +72,7 @@ def osc(self,*args):
 
 	if args[0] == '/live/view/get/selected_scene':
 		self.scenes.index[0] = args[1]
-		self.client.send_message('/live/clip_slot/get/has_clip',(self.track.index[0],self.scenes.index[0]))
+		#self.client.send_message('/live/clip_slot/get/has_clip',(self.track.index[0],self.scenes.index[0]))
 		#speak(self.scenes.index[0]+1)
 	
 	if args[0] == '/live/clip_slot/get/has_clip' and args[1] == self.track.index[0] and args[2] == self.scenes.index[0]:
@@ -77,24 +82,32 @@ def osc(self,*args):
 		else:
 			speak(selected_scene_output+' empty')
 	
+	## Get selected track
 	if args[0] == '/live/song/get/num_tracks':
 		tracks.num = args[1]
 		
+	## Get selected scene
 	if args[0] == '/live/song/get/num_scenes':
 		scenes.num = args[1]
 	
 	## Get devices data
 	if args[0] == '/live/track/get/devices/name':
-		if 'devices_check' in self.pVar:
-			plugins_tmp = []
-			for device in args[2:]:
-				plugins_tmp.append([device])
-			if not plugins_tmp == plugins.plugins_list:
+		if time.time() - self.datatmp['osc_tracking']['devices_check'][1] > 1:
+			if 'devices_check' in self.pVar:
+				plugins_tmp = []
+				for device in args[2:]:
+					plugins_tmp.append([device])
+				if not plugins_tmp == plugins.plugins_list:
+					self.devices_manage(*args,action='get_devices')
+					speak("Plugins list updated.")
+				self.pVar = []
+			else:
 				self.devices_manage(*args,action='get_devices')
-				speak("Plugins list updated.")
-			self.pVar = []
+			self.datatmp['osc_tracking']['page_change'][1] = time.time()
 		else:
-			self.devices_manage(*args,action='get_devices')
+			pass
+			### DEV
+			#print('deadly repeat')
 	
 	if args[0] == '/live/device/get/parameters/name':
 		self.devices_manage(*args,action='get_parameter_names')
@@ -139,9 +152,6 @@ def osc(self,*args):
 			"""
 
 	if args[0] == '/live/device/get/parameter/value_string':
-		#print(args)
-		#print(find_position(args[3]))
-		#param_tmp = self.plugins.params[args[3]+1]
 		plugins.params[args[3]+1]['valstr'] = args[4]
 
 	if args[0] == '/live/device/get/parameters/min':
@@ -211,11 +221,4 @@ def osc(self,*args):
 		time.sleep(1)
 		#self.session.refresh(False)
 			
-	
-	if args[0] == '/live/view/get/selected_scene':
-		scenes.selected = args[1]
-		time.sleep(0.5)
-		#speak(scenes.selected+1)
-	
-
 	"""

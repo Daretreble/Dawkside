@@ -2,7 +2,8 @@ from functions.speak import speak
 
 def type_select(self,*args):
 	""" Page type selection. """
-	main = self.daw.main
+	daw = self.daw
+	main = daw.main
 	modif = main.modif
 	
 	page_type = args[0]-380
@@ -19,7 +20,10 @@ def type_select(self,*args):
 			speak(output)
 		else:
 			self.page_type = page_type
-			self.daw.pVar = ['fxreload']
+			if daw.short_name == 'reaper':
+				daw.pVar = ['fxreload']
+			if daw.short_name == 'live':
+				daw.client.send_message('/live/track/get/devices/name',(daw.track.index[0],0))
 			speak('8-Banks' if self.page_type == 1 else 'User page')
 	else:
 		speak("Insert a plugin onto your track to enable the selection of a page type.")

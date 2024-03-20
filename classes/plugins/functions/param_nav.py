@@ -3,6 +3,7 @@ from functions.speak import speak
 def param_nav(self,dir,**kwargs):
 	""" Scrolls through plugin parameters. """
 	main = self.main
+	modif = main.modif
 
 	action = kwargs['action']
 
@@ -18,14 +19,18 @@ def param_nav(self,dir,**kwargs):
 			else:
 				pos = self.last_param['num']
 			
-			pos += dir
+			if modif('test',[900]):
+				pos = int(pos // 8) * 8
+				pos += (dir*8)+1
+			else:
+				pos += dir
 			if pos < 1:
 				pos = 0
 			if pos > 0:
 				if pos > max_params:
 					pos = max_params
 				self.last_param = {'act':True,'num':pos}
-				speak(data[self.last_param['num']]['name']+" "+str(pos-1))
+				speak(str(pos-1)+" "+data[self.last_param['num']]['name'])
 			else:
 				self.last_param = {'act':False}
 				speak('None selected')

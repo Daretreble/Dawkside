@@ -86,5 +86,4 @@ def matrix_in(self,*args,**kwargs):
 			try:
 				trig(args[1],self.getting_in[id])
 			except KeyError:
-				# Error 1
-				print('Error','matrix_in',1)
+				pass

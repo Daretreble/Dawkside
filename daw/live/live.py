@@ -60,6 +60,7 @@ class Live:
 				'track_change':[True,time.time()],
 				'page_change':[False,time.time()],
 				'page_load':[False,time.time()],
+				'devices_check':[False,time.time()],
 			},
 			'listens':{
 				'parameters':[],

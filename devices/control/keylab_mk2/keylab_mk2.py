@@ -18,7 +18,6 @@ def control_init(self):
 			114:[911,{}],
 			115:[900,{}],
 			110:[909,{}],
-			111:[910,{}],
 		},
 		0:{
 			'common':{
@@ -38,12 +37,19 @@ def control_init(self):
 				501:[1100,{}],
 				502:[1090,{}],
 				503:[104,{}],
+				130:[105,{}],
+				131:[106,{}],
 
 			},
 			100:{},
 			101:{},
 			102:{
-				88:[380,{}],
+				80:[376,{}],
+				81:[377,{}],
+				82:[378,{}],
+				83:[379,{}],
+				132:[910,{}],
+				251:[251,{'type':'param_nav'}],
 			},
 		},
 		1:{
@@ -52,14 +58,10 @@ def control_init(self):
 			},
 		},
 		2:{
-			'common':{
-				80:[376,{}],
-				81:[377,{}],
-				82:[378,{}],
-				83:[379,{}],
-			},
+			'common':{},
 			102:{
-				88:[381,{}],
+				80:[380,{}],
+				81:[381,{}],
 			},
 		},
 		3:{
@@ -78,8 +80,8 @@ def control_init(self):
 		self.default_layout['all'][3]['common'].update({_-340:[_,{}]})
 	
 	# Add fader buttons
-	for _ in range(300,308):
-		self.default_layout['all'][0]['common'].update({_-220:[_,{}]})
+	#for _ in range(300,308):
+		#self.default_layout['all'][0]['common'].update({_-220:[_,{}]})
 	
 	# Add Plugins action buttons
 	for _ in range(32):
@@ -125,11 +127,17 @@ def pre_midi(self,msg):
 
 
 going_out = {
-	'cc':{},
+	'cc':{
+		(60,0):[251,{'model':'r2'}],
+	},
 	'nt':{
 		### Don't modify 53 and 54 since they're the layouts buttons
 		(50,9):[921,[]],
 		(51,9):[922,[]],
+		
+		(98,0):[130,[]],
+		(99,0):[131,[]],
+		(84,0):[132,[]],
 		
 		# (110-115) lower assignable buttons apart from display buttons
 		(44,9):[110,[]],
@@ -176,7 +184,7 @@ going_out = {
 
 for _ in range(200,208):
 	# faders
-	going_out['pw'].update({(_-200):[_,{'model':'p1','pickup':{'grab_zone':2,'tolerance':2}}]})
+	going_out['pw'].update({(_-200):[_,{'model':'p1','pickup':{'grab_zone':2,'tolerance':4}}]})
 
 getting_in = {
 	

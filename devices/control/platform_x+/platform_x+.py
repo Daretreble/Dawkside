@@ -100,6 +100,14 @@ for _ in range(300,308):
 	going_out['nt'].update({(_-300,0):[_,[]]})
 	getting_in.update({_:[{'model':'nt'},_-300]})
 
+def pre_midi(self,msg):
+	
+	if msg.type == 'pitchwheel':
+		if msg.pitch > 8100:
+			msg.pitch = 8191
+		if msg.pitch < -8100:
+			msg.pitch = -8192
+
 data = {
 	'name' : "Icon Platform X+",
 	'ports':['Platform X+','Platform X+','startswith'],
@@ -109,6 +117,7 @@ data = {
 	'getting_in':getting_in,
 	'going_out':going_out,
 	'control_init':[control_init],
+	'pre_midi':[pre_midi,True],
 	'colors':{
 
 		# Common to all daws
