@@ -2,6 +2,6 @@
 *__pycache__*
 venv/*
 build/*
-_dev/*
+tests/*
 apps/*
 *.json
