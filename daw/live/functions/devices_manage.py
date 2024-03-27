@@ -36,25 +36,16 @@ def devices_manage(self,*args,**kwargs):
 				if (_+1)+base in plugins.params:
 					params_to_activate.append(_+base)
 
-		time.sleep(0.01)
+		time.sleep(0.1)
 		for _ in params_to_activate:
 			tuple_tmp = [self.track.index[0],self.plugins.index[0]-1,_]
 			self.client.send_message('/live/device/start_listen/parameter/value',tuple_tmp)
 			self.datatmp['listens']['parameters'].append(tuple_tmp)
 
-		"""
-		page_tmp = (self.plugins.page[0]-1) * 8
-		for _ in range(page_tmp,page_tmp+8):
-			tuple_tmp = [self.track.index[0],self.plugins.index[0]-1,_]
-			#self.client.send_message('/live/device/get/parameter/value',tuple_tmp)
-			self.client.send_message('/live/device/start_listen/parameter/value',tuple_tmp)
-			self.datatmp['listens']['parameters'].append(tuple_tmp)
-		"""
 		time.sleep(0.1)
 		plugins.user.manage()
 		plugins.user.refresh(action='full')
 		self.datatmp['osc_tracking']['page_load'][0] = False
-		main.play_sound('ready')
 	
 	if action == 'page_change':
 		page_change()

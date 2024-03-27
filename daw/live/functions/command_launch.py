@@ -1,3 +1,5 @@
+import time
+from threading import Thread
 from functions.speak import speak
 from functions.speak import speak
 
@@ -36,18 +38,29 @@ def command_launch(self,control,id,info,options):
 	## previous and next track
 	if state and id in[105,106]:
 		dir = -1 if id == 105 else 1
-		new_track = track.index[0] + dir
-		if new_track in range(0,self.tracks.num):
-			self.client.send_message('/live/view/set/selected_track',new_track)
+		self.track_select(dir,action='nav')
 
 	## previous and next scene
 	if state and id in[1105,1106]:
 		dir = -1 if id == 1105 else 1
-		new_scene = scene.index[0] + dir
-		if new_scene in range(0,self.scenes.num):
-			self.client.send_message('/live/view/set/selected_scene',new_track)
-		
+		self.scenes.select(dir,action='nav')
 	
+	## Manage cells
+	if state and id == 1070:
+		pos = options['pos']
+		if modif('test',[900]):
+			print('shirt',pos)
+		else:
+			def delayed_fire():
+				time.sleep(0.2)
+				self.client.send_message('/live/clip_slot/fire',(pos,self.scenes.index[0]))
+			if self.track.index[0] != pos:
+				Thread(target=delayed_fire).start()
+				self.client.send_message('/live/view/set/selected_track',pos)
+			else:
+				self.client.send_message('/live/clip_slot/fire',(pos,self.scenes.index[0]))
+			
+
 	## Deletes selected clip
 	if state and id == 1090:
 		self.clips.delete(self.track.index[0],self.scenes.index[0])

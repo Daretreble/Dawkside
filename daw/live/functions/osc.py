@@ -67,13 +67,11 @@ def osc(self,*args):
 	if args[0] == '/live/view/get/selected_track':
 		self.loop_switchtime = time.time()
 		self.track.index[0] = args[1]
-		self.datatmp['osc_tracking']['track_change'][1] = time.time()
-		self.datatmp['osc_tracking']['track_change'][0] = True
+		self.datatmp['osc_tracking']['track_change'] = [True,time.time()]
 
 	if args[0] == '/live/view/get/selected_scene':
 		self.scenes.index[0] = args[1]
-		#self.client.send_message('/live/clip_slot/get/has_clip',(self.track.index[0],self.scenes.index[0]))
-		#speak(self.scenes.index[0]+1)
+		self.datatmp['osc_tracking']['scene_change'] = [True,time.time()]
 	
 	if args[0] == '/live/clip_slot/get/has_clip' and args[1] == self.track.index[0] and args[2] == self.scenes.index[0]:
 		selected_scene_output = str(self.scenes.index[0]+1)

@@ -5,7 +5,7 @@ class Tracks:
 	
 		self.daw = daw
 		self.tracks = {}
-		self.num = 0
+		self.num = [0,0]
 		self.index  = [0,0]
 		daw.fre['tracks'] = {'volume':{},'pan':{}}
 		for vp in ['volume','pan']:

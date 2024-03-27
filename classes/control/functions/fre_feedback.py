@@ -7,7 +7,7 @@ def fre_feedback(self,*args):
 	
 	outmode = args[0]
 	pos = args[1]
-	value = max(0.0, min(args[2], 1.0))
+	value = max(0.0, min(args[2] if args[2] else 0.0, 1.0))
 	daw = self.daw
 
 	if self.daw_vars['outmode'] == outmode:

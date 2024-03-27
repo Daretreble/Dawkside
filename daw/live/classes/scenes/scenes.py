@@ -7,7 +7,20 @@ class Scenes:
 	
 		self.daw = daw
 		self.index = [0,0]
+		self.num = 0
 		
+	def select(self,*args,**kwargs):
+
+		action = kwargs['action']
+		
+		if action == 'nav':
+			
+			dir = args[0]
+			new_scene = self.index[0] + dir
+			if new_scene in range(0,self.num):
+				speak(new_scene+1)
+				self.daw.client.send_message('/live/view/set/selected_scene',new_scene)
+	
 	def trig(self,*args,**kwargs):
 	
 		action = kwargs['action']

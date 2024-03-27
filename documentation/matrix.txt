@@ -106,6 +106,7 @@
 ABLETON LIVE EXCLUSIVES
 
 1000-1063: 64 pads matrix
+1070: Individual button action
 1090: Delete selected clip in selected clip slot
 1091: Fires selected clip slot
 1100: Toggle record in session mode

@@ -6,6 +6,7 @@ from classes.plugins.plugins import Plugins
 from classes.transport.transport import Transport
 from .classes import *
 from .functions import *
+from functions.speak import speak
 
 class Live:
 	""" Control Live calls. """
@@ -15,7 +16,7 @@ class Live:
 		self.short_name = 'live'
 		self.developer = ["Ableton"]
 		self.switch_on = True
-		self.switch_delay = 0.4
+		self.switch_delay = 0.2
 		self.fre = {
 			'track':False,
 			'tracks':False,
@@ -57,6 +58,7 @@ class Live:
 			'first_load':True,
 			'first_pass_startup':True,
 			'osc_tracking':{
+				'scene_change':[True,time.time()],
 				'track_change':[True,time.time()],
 				'page_change':[False,time.time()],
 				'page_load':[False,time.time()],
@@ -76,7 +78,17 @@ class Live:
 			'track_offset':0,
 			'scene_offset':0,
 		}
+	def track_select(self,*args,**kwargs):
 
+		action = kwargs['action']
+		
+		if action == 'nav':
+			
+			dir = args[0]
+			new_track = self.track.index[0] + dir
+			if new_track in range(0,self.tracks.num):
+				self.client.send_message('/live/view/set/selected_track',new_track)
+	
 	def fake_valstr(self,pos,value):
 		if pos in range(6) or pos == 7:
 			return str(round(value*100)) + "percent"

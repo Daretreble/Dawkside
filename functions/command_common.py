@@ -23,8 +23,7 @@ def command_common(self,control,id,info,options):
 	
 	## Debug
 	if state and id == 999:
-		os.system('cls')
-		print(self.tracks.num)
+		self.client.send_message('/live/view/set/selected_track',1)
 
 	## All modifiers
 	if id not in range(921,924) and id in main.modifiers_data['list']:
@@ -47,6 +46,8 @@ def command_common(self,control,id,info,options):
 			plugins.param_nav((1*rotary_info[1]) if rotary_info[0] else (-1*rotary_info[1]),action='nav')
 		if output_type == 'scale_nav':
 			control.modes.scales_nav(1 if rotary_info[0] else -1,action='nav')
+		if output_type == 'scene_nav':
+			self.scenes.select((1*rotary_info[1]) if rotary_info[0] else (-1*rotary_info[1]),action='nav')
 	
 	## Daw select
 	if state and id in range(420,425) and id-420 < len(main.daws):
