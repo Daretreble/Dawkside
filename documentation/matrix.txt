@@ -1,0 +1,121 @@
+######################################
+##                                  ##
+##   Matrix_send default mappings   ##
+##                                  ##
+######################################                                  ##
+
+--- Buttons ---
+70: Selected track's solo
+71: Selected track's mute
+72: Selected track's armed
+80: Undo
+81: Redo
+89: Zoom In
+90: Zoom Out
+91: Rewind
+92: Fast Forward
+93: Stop
+94: Play
+95: Record
+96: Punch In
+97: Punch Out
+98: Click Toggle
+99: Marker Set
+100: Previous Marker
+101: Next Marker
+102: Loop
+103: Latch Toggle
+104: Tap tempo
+105: Previous track
+106: Next track
+107: Insert captured MIDI data
+
+120: Select send
+121: Select Receive
+
+--- Faders and Encoders Move ---
+200-231: Channel
+240: Master fader
+251: Encoder 1
+252: Encoder 2
+253: Encoder 3
+
+--- Plugin buttons
+260-291: User defined plugin page buttons
+
+--- Faders and Encoders Touch ---
+300-331: Channel
+340: Master fader
+351: Encoder 1
+352: Encoder 2
+353: Encoder 3
+
+--- Plugin selection buttons ---
+360-375: Selects a plugin id
+376: Previous user plugin page
+377: Next user plugin page
+378: Previous plugin
+379: Next plugin
+380: Page type Banks select
+381: Page type User page sect
+382: Previous parameter
+383: Next parameter
+
+--- Menus ---
+400-407: Mode selection
+410-417: Output mode selection
+420-427: Daw selection
+430-437: Play modes selection
+
+--- Keys functions ---
+700-703: Zone 1-4 transpose Down
+705: Save zone for the selected track
+706: Save zone for the selected plugin
+710=713: Zone 1-4 transpose Up
+720-723: Zone 1-4 direct function button
+
+--- Routing functions ---
+750: Default routing
+751: Other routing (use routing port name as options)
+
+--- Play modes zones ---
+800-863: Main modes matrix
+864: Transpose fine down
+865: Transpose fine up
+866: Transpose bank down
+867: Transpose bank up
+868: Scale down
+869: Scale up
+
+--- Modifiers ---
+900: Shift
+901: Mod 1
+902: Mod 2
+903: Mod 2
+904: Select
+905: Alt
+906: Control
+907: Switch
+908: Add
+909: Delete
+910: Set
+911: Help
+921: layout 1
+922: layout 2
+923: layout 3
+
+
+----------------------------
+ABLETON LIVE EXCLUSIVES
+
+1000-1063: 64 pads matrix
+1070: Individual button action
+1090: Delete selected clip in selected clip slot
+1091: Fires selected clip slot
+1092: Set start of clip loop
+1093: Set end of clip loop
+1100: Toggle record in session mode
+1105: Select previous scene
+1106: Select next scene
+1198: Reloads selected track's devices
+1199: Reloads AbletonOSC script
